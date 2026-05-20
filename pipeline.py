@@ -658,7 +658,7 @@ def export_json():
             d["tags"] = []
         articles.append(d)
     out = Path(__file__).parent / "articles.json"
-    out.write_text(json.dumps(articles, ensure_ascii=False, indent=2))
+    out.write_text(json.dumps(articles, ensure_ascii=False, indent=2), encoding="utf-8")
     log.info("Exportado articles.json — %d articulos", len(articles))
 
 if __name__ == "__main__":

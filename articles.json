@@ -1,10 +1,27 @@
 [
   {
+    "id": "982856e262c9",
+    "paper_id": "core_159540978",
+    "headline": "Nuevo sensor de glucosa autopoderizado: Una sorpresa en el mundo de la tecnolog铆a",
+    "summary": "Un equipo de investigadores present贸 un sensor de glucosa que funciona sin energ铆a externa y es m谩s eficiente gracias a materiales compuestos bimet谩licos en las electrodos.",
+    "body": "El equipo, liderado por la Universidad de XYZ, ha creado un sensor de glucosa que funciona sin energ铆a externa y es m谩s eficiente gracias a materiales compuestos bimet谩licos en las electrodos. Este dise帽o original permite un mayor rendimiento al integrar una capa sensible para la detecci贸n de glucosa (GOx) con una capa conductora (MWCNT y Fc). La protecci贸n adicional del sensor se logr贸 mediante la aplicaci贸n de una capa de col谩geno. Los resultados de cronoamperometr铆a muestran que el nuevo sensor presenta una alta capacidad para medir niveles de glucosa en sangre con precisi贸n.",
+    "category": "science.general",
+    "tags": [
+      "science",
+      "renewable energy",
+      "healthcare technology",
+      "biocatalysts"
+    ],
+    "image_prompt": "scientific instrument dial gauge close-up macro, photorealistic, documentary photography, natural lighting, Canon EOS R5, 100mm macro lens, high resolution, sharp focus, no text, no watermark, no humans, no people, no hands, no faces, no bodies, no illustration, no cartoon, no digital art, no painting",
+    "published_at": "2026-05-20T11:45:01.527118+00:00",
+    "status": "published"
+  },
+  {
     "id": "16c1fc2fb4d7",
     "paper_id": "arxiv_2605.20172v1",
-    "headline": "Planificaci髇 del sistema el閏trico a largo plazo mediante Programaci髇 de Conjuntos de Respuestas",
-    "summary": "Un estudio presenta una nueva forma de planificar el sistema el閏trico en escala larga para adaptarse a cambios en la demanda, la urbanizaci髇 y los objetivos de sostenibilidad. La tarea es dif韈il de expresar en lenguajes de planificaci髇 actuales; sin embargo, puede ser encarnada con elegancia y brevedad mediante el uso del Programaci髇 de Conjuntos de Respuestas.",
-    "body": "El sistema el閏trico es una infraestructura cr韙ica que soporta todas las facetas de la sociedad moderna. Mantener su eficacia requiere adaptaciones continuas. En particular, abordar objetivos de sostenibilidad, patrones de demanda y tendencias urbanas requieren cambios en la red. Los desarrollos actuales pueden potencialmente durar d閏adas, con la continuidad del suministro y calidad de servicio que deben ser preservados a lo largo del tiempo mediante el cumplimiento de varias invariantes topol骻icas y combinatorias. La planificaci髇 del sistema el閏trico en larga escala se enfoca en este proceso, aunque los lenguajes de planificaci髇 pudieran ser una elecci髇 natural, las propiedades y invariantes necesarias son dif韈iles de expresar en tales lenguajes; sin embargo, pueden ser encarnadas con elegancia y brevedad mediante el uso del Programaci髇 de Conjuntos de Respuestas. Este estudio presenta una nueva forma de planificar el sistema el閏trico en escala larga para adaptarse a los cambios en la demanda, la urbanizaci髇 y los objetivos de sostenibilidad. La tarea es dif韈il de expresar en lenguajes de planificaci髇 actuales; sin embargo, puede ser encarnada con elegancia y brevedad mediante el uso del Programaci髇 de Conjuntos de Respuestas.",
+    "headline": "Planificaci贸n del sistema el茅ctrico a largo plazo mediante Programaci贸n de Conjuntos de Respuestas",
+    "summary": "Un estudio presenta una nueva forma de planificar el sistema el茅ctrico en escala larga para adaptarse a cambios en la demanda, la urbanizaci贸n y los objetivos de sostenibilidad. La tarea es dif铆cil de expresar en lenguajes de planificaci贸n actuales; sin embargo, puede ser encarnada con elegancia y brevedad mediante el uso del Programaci贸n de Conjuntos de Respuestas.",
+    "body": "El sistema el茅ctrico es una infraestructura cr铆tica que soporta todas las facetas de la sociedad moderna. Mantener su eficacia requiere adaptaciones continuas. En particular, abordar objetivos de sostenibilidad, patrones de demanda y tendencias urbanas requieren cambios en la red. Los desarrollos actuales pueden potencialmente durar d茅cadas, con la continuidad del suministro y calidad de servicio que deben ser preservados a lo largo del tiempo mediante el cumplimiento de varias invariantes topol贸gicas y combinatorias. La planificaci贸n del sistema el茅ctrico en larga escala se enfoca en este proceso, aunque los lenguajes de planificaci贸n pudieran ser una elecci贸n natural, las propiedades y invariantes necesarias son dif铆ciles de expresar en tales lenguajes; sin embargo, pueden ser encarnadas con elegancia y brevedad mediante el uso del Programaci贸n de Conjuntos de Respuestas. Este estudio presenta una nueva forma de planificar el sistema el茅ctrico en escala larga para adaptarse a los cambios en la demanda, la urbanizaci贸n y los objetivos de sostenibilidad. La tarea es dif铆cil de expresar en lenguajes de planificaci贸n actuales; sin embargo, puede ser encarnada con elegancia y brevedad mediante el uso del Programaci贸n de Conjuntos de Respuestas.",
     "category": "cs.AI",
     "tags": [
       "power grid",
@@ -20,9 +37,9 @@
   {
     "id": "6366788208e1",
     "paper_id": "arxiv_2605.20182v1",
-    "headline": "Descubrimiento de una representaci髇 universal para ondas cerebrales: Microestados",
-    "summary": "Un equipo de investigadores ha desarrollado un tokenizador universal de microestados a partir de datos EEG m閐icos, lo que puede revolucionar la neuroinform醫ica y las interfaces computador-cerebro.",
-    "body": "En el campo de la neuroinformatica y de las interfaces computador-cerebro (BCIs), encontrar representaciones universales a partir de los datos de ondas cerebrales electroencefalogramas (EEG) es una aproximaci髇 a vanguardia. Tradicionalmente, el EEG se trata como un senyal multivariante temporal, donde se extraen caracter韘ticas en el tiempo o en la frecuencia para el aprendizaje de representaciones. Este art韈ulo investiga una representaci髇 de EEG sencilla pero efectiva: los microestados. Los microestados son los bloques b醩icos de patrones de actividad cerebral a escalas de tiempo microsc髉icas. Se ha construido un tokenizador universal de microestados a partir de un gran conjunto de datos EEG m閐ico, al clustear se馻les continuas de EEG en secuencias de microestados discretos. El tokenizador de microestados se adopta entonces universalmente en una serie de tareas downstream, incluyendo el estudio del estado de sue駉, la reconocimiento de emociones y otras aplicaciones. La importancia de este descubrimiento reside en que podr韆 mejorar significativamente los sistemas BCIs, abriendo camino a nuevas posibilidades para la medicina y la tecnolog韆.",
+    "headline": "Descubrimiento de una representaci贸n universal para ondas cerebrales: Microestados",
+    "summary": "Un equipo de investigadores ha desarrollado un tokenizador universal de microestados a partir de datos EEG m茅dicos, lo que puede revolucionar la neuroinform谩tica y las interfaces computador-cerebro.",
+    "body": "En el campo de la neuroinformatica y de las interfaces computador-cerebro (BCIs), encontrar representaciones universales a partir de los datos de ondas cerebrales electroencefalogramas (EEG) es una aproximaci贸n a vanguardia. Tradicionalmente, el EEG se trata como un senyal multivariante temporal, donde se extraen caracter铆sticas en el tiempo o en la frecuencia para el aprendizaje de representaciones. Este art铆culo investiga una representaci贸n de EEG sencilla pero efectiva: los microestados. Los microestados son los bloques b谩sicos de patrones de actividad cerebral a escalas de tiempo microsc贸picas. Se ha construido un tokenizador universal de microestados a partir de un gran conjunto de datos EEG m茅dico, al clustear se帽ales continuas de EEG en secuencias de microestados discretos. El tokenizador de microestados se adopta entonces universalmente en una serie de tareas downstream, incluyendo el estudio del estado de sue帽o, la reconocimiento de emociones y otras aplicaciones. La importancia de este descubrimiento reside en que podr铆a mejorar significativamente los sistemas BCIs, abriendo camino a nuevas posibilidades para la medicina y la tecnolog铆a.",
     "category": "cs.AI",
     "tags": [
       "neuroinformatics",
