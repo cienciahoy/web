@@ -1,0 +1,38 @@
+[
+  {
+    "id": "16c1fc2fb4d7",
+    "paper_id": "arxiv_2605.20172v1",
+    "headline": "Planificación del sistema eléctrico a largo plazo mediante Programación de Conjuntos de Respuestas",
+    "summary": "Un estudio presenta una nueva forma de planificar el sistema eléctrico en escala larga para adaptarse a cambios en la demanda, la urbanización y los objetivos de sostenibilidad. La tarea es difícil de expresar en lenguajes de planificación actuales; sin embargo, puede ser encarnada con elegancia y brevedad mediante el uso del Programación de Conjuntos de Respuestas.",
+    "body": "El sistema eléctrico es una infraestructura crítica que soporta todas las facetas de la sociedad moderna. Mantener su eficacia requiere adaptaciones continuas. En particular, abordar objetivos de sostenibilidad, patrones de demanda y tendencias urbanas requieren cambios en la red. Los desarrollos actuales pueden potencialmente durar décadas, con la continuidad del suministro y calidad de servicio que deben ser preservados a lo largo del tiempo mediante el cumplimiento de varias invariantes topológicas y combinatorias. La planificación del sistema eléctrico en larga escala se enfoca en este proceso, aunque los lenguajes de planificación pudieran ser una elección natural, las propiedades y invariantes necesarias son difíciles de expresar en tales lenguajes; sin embargo, pueden ser encarnadas con elegancia y brevedad mediante el uso del Programación de Conjuntos de Respuestas. Este estudio presenta una nueva forma de planificar el sistema eléctrico en escala larga para adaptarse a los cambios en la demanda, la urbanización y los objetivos de sostenibilidad. La tarea es difícil de expresar en lenguajes de planificación actuales; sin embargo, puede ser encarnada con elegancia y brevedad mediante el uso del Programación de Conjuntos de Respuestas.",
+    "category": "cs.AI",
+    "tags": [
+      "power grid",
+      "sustainability",
+      "ASP",
+      "declarative programming",
+      "infrastructure"
+    ],
+    "image_prompt": "abstract binary data stream floating blue dark background, photorealistic, documentary photography, natural lighting, Canon EOS R5, 100mm macro lens, high resolution, sharp focus, no text, no watermark, no humans, no people, no hands, no faces, no bodies, no illustration, no cartoon, no digital art, no painting",
+    "published_at": "2026-05-20T11:04:45.384215+00:00",
+    "status": "published"
+  },
+  {
+    "id": "6366788208e1",
+    "paper_id": "arxiv_2605.20182v1",
+    "headline": "Descubrimiento de una representación universal para ondas cerebrales: Microestados",
+    "summary": "Un equipo de investigadores ha desarrollado un tokenizador universal de microestados a partir de datos EEG médicos, lo que puede revolucionar la neuroinformática y las interfaces computador-cerebro.",
+    "body": "En el campo de la neuroinformatica y de las interfaces computador-cerebro (BCIs), encontrar representaciones universales a partir de los datos de ondas cerebrales electroencefalogramas (EEG) es una aproximación a vanguardia. Tradicionalmente, el EEG se trata como un senyal multivariante temporal, donde se extraen características en el tiempo o en la frecuencia para el aprendizaje de representaciones. Este artículo investiga una representación de EEG sencilla pero efectiva: los microestados. Los microestados son los bloques básicos de patrones de actividad cerebral a escalas de tiempo microscópicas. Se ha construido un tokenizador universal de microestados a partir de un gran conjunto de datos EEG médico, al clustear señales continuas de EEG en secuencias de microestados discretos. El tokenizador de microestados se adopta entonces universalmente en una serie de tareas downstream, incluyendo el estudio del estado de sueño, la reconocimiento de emociones y otras aplicaciones. La importancia de este descubrimiento reside en que podría mejorar significativamente los sistemas BCIs, abriendo camino a nuevas posibilidades para la medicina y la tecnología.",
+    "category": "cs.AI",
+    "tags": [
+      "neuroinformatics",
+      "brain-computer interfaces",
+      "EEG",
+      "microstates",
+      "representation learning"
+    ],
+    "image_prompt": "server rack data center blinking LED lights, photorealistic, documentary photography, natural lighting, Canon EOS R5, 100mm macro lens, high resolution, sharp focus, no text, no watermark, no humans, no people, no hands, no faces, no bodies, no illustration, no cartoon, no digital art, no painting",
+    "published_at": "2026-05-20T11:01:59.614406+00:00",
+    "status": "published"
+  }
+]

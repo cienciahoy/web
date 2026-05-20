@@ -641,7 +641,25 @@ def run_pipeline():
     log.info("── Imagenes ─────────────────────────")
     generate_images(articles)
 
+    export_json()
+    
     log.info("═══ DONE — %d articulos nuevos listos ═══", len(articles))
+
+def export_json():
+    con  = get_db()
+    rows = con.execute("SELECT * FROM articles WHERE status='published' ORDER BY published_at DESC").fetchall()
+    con.close()
+    articles = []
+    for r in rows:
+        d = dict(r)
+        try:
+            d["tags"] = json.loads(d.get("tags", "[]"))
+        except:
+            d["tags"] = []
+        articles.append(d)
+    out = Path(__file__).parent / "articles.json"
+    out.write_text(json.dumps(articles, ensure_ascii=False, indent=2))
+    log.info("Exportado articles.json — %d articulos", len(articles))
 
 if __name__ == "__main__":
     import sys

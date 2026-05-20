@@ -1,9 +1,9 @@
 """
 CienciaHoy — web.py
+Lee desde articles.json (sin SQLite)
 """
 
 import json
-import sqlite3
 from datetime import datetime
 from pathlib import Path
 
@@ -12,8 +12,8 @@ from fastapi.responses import HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
-DB_PATH    = Path(__file__).parent / "data.db"
-IMAGES_DIR = Path(__file__).parent / "static" / "images"
+ARTICLES_PATH = Path(__file__).parent / "articles.json"
+IMAGES_DIR    = Path(__file__).parent / "static" / "images"
 IMAGES_DIR.mkdir(parents=True, exist_ok=True)
 
 CAT_LABELS = {
@@ -32,31 +32,38 @@ app = FastAPI()
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["GET"], allow_headers=["*"])
 app.mount("/static", StaticFiles(directory=Path(__file__).parent / "static"), name="static")
 
-def get_db():
-    if not DB_PATH.exists():
-        raise HTTPException(status_code=503, detail="DB no encontrada.")
-    con = sqlite3.connect(DB_PATH)
-    con.row_factory = sqlite3.Row
-    return con
 
-def row_to_dict(row) -> dict:
-    d = dict(row)
+def load_articles() -> list:
+    if not ARTICLES_PATH.exists():
+        return []
     try:
-        d["tags"] = json.loads(d.get("tags", "[]"))
-    except:
-        d["tags"] = []
+        return json.loads(ARTICLES_PATH.read_text(encoding="utf-8"))
+    except Exception:
+        return []
+
+
+def enrich(a: dict) -> dict:
+    d = dict(a)
+    if isinstance(d.get("tags"), str):
+        try:
+            d["tags"] = json.loads(d["tags"])
+        except Exception:
+            d["tags"] = []
     if d.get("published_at"):
         try:
             dt = datetime.fromisoformat(d["published_at"].replace("Z", "+00:00"))
             meses = ["enero","febrero","marzo","abril","mayo","junio",
                      "julio","agosto","septiembre","octubre","noviembre","diciembre"]
             d["published_at_fmt"] = f"{dt.day} de {meses[dt.month-1]}, {dt.year}"
-        except:
+        except Exception:
             d["published_at_fmt"] = d["published_at"][:10]
     cat = d.get("category", "")
     d["category_label"] = CAT_LABELS.get(cat, cat.split(".")[-1] if "." in cat else cat)
     d["has_image"] = (IMAGES_DIR / f"{d['id']}.jpg").exists()
     return d
+
+
+# ── API ───────────────────────────────────────────────────────────────────────
 
 @app.get("/api/articles")
 def list_articles(
@@ -64,51 +71,46 @@ def list_articles(
     per_page: int = Query(12, ge=1, le=50),
     category: str = Query(None),
 ):
-    con    = get_db()
-    offset = (page - 1) * per_page
-    where  = ["status = 'published'"]
-    params = []
+    all_articles = [enrich(a) for a in load_articles() if a.get("status") == "published"]
     if category:
-        where.append("category = ?")
-        params.append(category)
-    w     = " AND ".join(where)
-    total = con.execute(f"SELECT COUNT(*) FROM articles WHERE {w}", params).fetchone()[0]
-    rows  = con.execute(
-        f"SELECT * FROM articles WHERE {w} ORDER BY published_at DESC LIMIT ? OFFSET ?",
-        params + [per_page, offset],
-    ).fetchall()
-    con.close()
+        all_articles = [a for a in all_articles if a.get("category") == category]
+    total  = len(all_articles)
+    offset = (page - 1) * per_page
+    page_articles = all_articles[offset:offset + per_page]
     return {
-        "total": total, "page": page,
-        "pages": (total + per_page - 1) // per_page,
-        "articles": [row_to_dict(r) for r in rows],
+        "total":    total,
+        "page":     page,
+        "pages":    max(1, (total + per_page - 1) // per_page),
+        "articles": page_articles,
     }
+
 
 @app.get("/api/articles/{article_id}")
 def get_article(article_id: str):
-    con = get_db()
-    row = con.execute(
-    "SELECT * FROM articles WHERE id=? AND status='published'",
-        (article_id,),
-    ).fetchone()
-    con.close()
-    if not row:
-        raise HTTPException(status_code=404, detail="No encontrado")
-    return row_to_dict(row)
+    all_articles = load_articles()
+    for a in all_articles:
+        if a.get("id") == article_id and a.get("status") == "published":
+            return enrich(a)
+    raise HTTPException(status_code=404, detail="No encontrado")
+
 
 @app.get("/api/categories")
 def list_categories():
-    con  = get_db()
-    rows = con.execute(
-        "SELECT category, COUNT(*) as n FROM articles WHERE status='published' GROUP BY category ORDER BY n DESC"
-    ).fetchall()
-    con.close()
-    return [{"category": r["category"], "count": r["n"],
-             "label": CAT_LABELS.get(r["category"], r["category"])} for r in rows]
+    all_articles = [a for a in load_articles() if a.get("status") == "published"]
+    counts: dict = {}
+    for a in all_articles:
+        cat = a.get("category", "")
+        counts[cat] = counts.get(cat, 0) + 1
+    return [
+        {"category": cat, "count": n, "label": CAT_LABELS.get(cat, cat)}
+        for cat, n in sorted(counts.items(), key=lambda x: -x[1])
+    ]
+
 
 @app.get("/health")
 def health():
-    return {"status": "ok", "db": DB_PATH.exists()}
+    return {"status": "ok", "articles_file": ARTICLES_PATH.exists(), "count": len(load_articles())}
+
 
 # ── CSS ───────────────────────────────────────────────────────────────────────
 
@@ -401,11 +403,8 @@ def index():
 
 @app.get("/article/{article_id}", response_class=HTMLResponse)
 def article_page(article_id: str):
-    con = get_db()
-    row = con.execute(
-        "SELECT id FROM articles WHERE id=? AND status='published'", (article_id,)
-    ).fetchone()
-    con.close()
-    if not row:
+    all_articles = load_articles()
+    found = any(a.get("id") == article_id and a.get("status") == "published" for a in all_articles)
+    if not found:
         raise HTTPException(status_code=404, detail="No encontrado")
     return ARTICLE.replace("{article_id}", article_id)
