@@ -17,9 +17,9 @@ Arrancar en 5 pasos
 1. Instalar dependencias
 pip install httpx schedule fastapi uvicorn requests
 2. Instalar Ollama
-ollama run llama3
 
-ollama run mistral
+
+ollama serve
 3. Inicializar la base de datos (con ejemplos)
 python init_db.py
 
@@ -27,7 +27,7 @@ Esto crea data.db con 3 noticias de ejemplo para que veas la web funcionando ant
 
 4. Ver la web
 uvicorn web:app --reload --port 8000
-
+ 
 Abre http://localhost:8000
 
 5. Correr el pipeline (genera noticias reales)
