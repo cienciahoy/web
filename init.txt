@@ -1,0 +1,26 @@
+cienciahoy@proton.me pepinata5616
+
+Instalar Git en Windows
+Paso 1 — Descargar Git
+Ve a esta página:
+https://git-scm.com/download/win
+Se descarga automáticamente. Si no, haz clic en "Click here to download".
+
+Paso 2 — Ejecutar el instalador
+Abre el archivo .exe que se descargó. Te van a salir muchas pantallas con opciones. No cambies nada, dale "Next" a todo hasta que aparezca "Install".
+Haz clic en Install y espera. Luego Finish.
+
+Paso 3 — Verificar que funcionó
+Abre PowerShell (busca "PowerShell" en el menú inicio) y escribe:
+git --versión
+
+"Use bundled OpenSSH"
+"Use the OpenSSL library"
+"Checkout Windows-style, commit Unix-style line endings"
+ "Use MinTTY"
+ "Fast-forward or merge"
+"Git Credential Manager"
+
+git add .
+git commit -m "lanzamiento"
+git push -u origin master

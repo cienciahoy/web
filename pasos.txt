@@ -1,0 +1,173 @@
+Los pasos de hoy
+Paso 1 — Genera las 2 noticias en local
+Primero tienes que tener data.db con artículos reales (no los de ejemplo). Esto lo haces en tu PC con Ollama corriendo.
+
+Paso 2 — Prepara el proyecto para Render
+Render necesita que tu código esté en GitHub. Crearemos un repo con web.py, requirements.txt, y un Procfile.
+
+Paso 3 — Sube la base de datos
+SQLite en Render tiene un problema: el disco es efímero (se borra al redeploy). Solución gratuita: usamos Turso (SQLite en la nube, free tier generoso) o simplemente hacemos que el pipeline suba data.db a un bucket gratuito.
+La opción más simple para empezar: Railway.app que sí tiene disco persistente en free tier.
+
+Paso 4 — Deploy automático
+Cada vez que corras el pipeline en local, subes la DB actualizada y la web se refresca.
+
+Instalar Git en Windows
+Paso 1 — Descargar Git
+Ve a esta página:
+https://git-scm.com/download/win
+Se descarga automáticamente. Si no, haz clic en "Click here to download".
+
+Paso 2 — Ejecutar el instalador
+Abre el archivo .exe que se descargó. Te van a salir muchas pantallas con opciones. No cambies nada, dale "Next" a todo hasta que aparezca "Install".
+Haz clic en Install y espera. Luego Finish.
+
+Paso 3 — Verificar que funcionó
+Abre PowerShell (busca "PowerShell" en el menú inicio) y escribe:
+git --version
+Dime exactamente qué te aparece.Dijiste: Use bonded o external Open SHH ?
+
+Elige "Use the OpenSSL library"
+Es la opción de arriba, la que viene marcada por defecto. No cambies nada, Next.
+
+Elige "Checkout Windows-style, commit Unix-style line endings"
+
+Elige "Use MinTTY"
+
+Elige "Fast-forward or merge"
+
+Elige "Git Credential Manager"
+
+Desmarca "Launch Git Bash" y dale Finish
+
+Perfecto. Ahora crea el repositorio en GitHub.
+Paso 1 — Crear el repo
+Estando en GitHub, haz clic en el botón verde que dice "New" (esquina superior izquierda) o ve directamente a:
+https://github.com/new
+
+Paso 2 — Rellena así
+
+Repository name: sciencetoday
+Description: AI Science Newsroom
+Public o Private: elige Public (necesario para el hosting gratuito)
+NO marques nada de las casillas de abajo (README, .gitignore, license)
+
+
+Paso 3 — Crear
+Haz clic en "Create repository"
+
+¿Ya ves la página del repositorio vacío en GitHub? Debe decir algo como:
+"Quick setup — if you've done this kind of thing before"
+
+puedo ir a la carpeta y poner abrir powershell aqui tambien?18 mayClaude respondió: Sí, exactamente, es más fácil así.Sí, exactamente, es más fácil así.
+Ve a la carpeta cienciahoy en el Explorador de archivos, haz clic derecho en un espacio vacío dentro de la carpeta y verás la opción:
+"Abrir en Terminal" o "Open in Terminal"
+Haz clic ahí y se abre PowerShell ya dentro de la carpeta correcta.
+Luego escribe ls y dime qué archivos ves.
+
+Perfecto. Escribe esto y dime qué archivos te aparecen:
+ls
+
+Ahora vamos a inicializar Git en esta carpeta. Escribe esto:
+git init
+
+Ahora vamos a conectar esta carpeta con tu repositorio de GitHub. Escribe esto exactamente, cambiando TU_USUARIO por tu nombre de usuario de GitHub:
+git remote add origin https://github.com/cienciahoy/web.git
+
+Ahora necesitamos crear un archivo muy importante antes de subir nada. Se llama .gitignore y le dice a Git qué archivos no subir (como la carpeta env, la base de datos, etc.).
+Escribe esto exactamente:
+echo "env/
+__pycache__/
+*.pyc
+data.db
+static/images/
+*.db" > .gitignore
+
+
+Ahora escribe esto:
+git commit -m "primer commit"
+
+PS C:\Users\termo\Desktop\cienciahoy>
+
+18 may
+Git necesita saber quién eres. Escribe estos dos comandos uno por uno, con el email y nombre de tu cuenta de GitHub:
+
+git config --global user.email "tu@email.com"
+git config --global user.name "cienciahoy"
+Cambia tu@email.com por el email con el que te registraste en GitHub. Dime cuando lo hayas escrito.
+
+Ahora repite el commit:
+git commit -m "primer commit"
+
+Perfecto, commit hecho ✅
+Ahora subimos todo a GitHub. Escribe esto:
+git push -u origin master
+
+Lo que tienes que hacer ahora
+1. Correr el pipeline (ya lo sabes):
+python pipeline.py
+2. Cuando aparezca DONE, arrancar la web en local para verificar:
+uvicorn web:app --reload --port 8000
+Abre http://localhost:8000 y comprueba que se ven las 2 noticias con fotos.
+3. Si todo se ve bien, subir a GitHub:
+git add .
+git commit -m "lanzamiento"
+git push -u origin master
+
+El entorno virtual está roto por el cambio de nombre. Créalo de nuevo:
+python -m venv env
+.\env\Scripts\Activate.ps1
+pip install fastapi uvicorn aiofiles requests
+
+
+Ahora subimos a internet.
+
+Paso 1 — En PowerShell (carpeta cienciahoy, sin uvicorn):
+
+git add .
+git commit -m "lanzamiento"
+git push -u origin master
+
+Inicia sesión con tu cuenta de GitHub. Debería abrirse una ventana del navegador para autenticarte. Haz clic en "Authorize" o "Sign in with browser".
+
+Sign in with your browser.
+
+Ahora vamos a publicarlo en internet con Render. Ve a:
+https://render.com
+Haz clic en "Get Started for Free" y regístrate con tu cuenta de GitHub. Dime cuando estés dentro.
+
+Ahora:
+Haz clic en "New +" (arriba a la derecha)
+Selecciona "Web Service"
+
+Busca tu repositorio cienciahoy/web en la lista y haz clic en Connect.
+
+Haz clic en GitHub para dar permisos a Render. Se abrirá una ventana de GitHub, dale Authorize y selecciona el repositorio web.
+
+Elige Only select repositories y selecciona web. Luego haz clic en Install.
+
+Ahora deberías ver el repositorio web en la lista. Haz clic en Connect junto a él.
+
+Rellena así:
+
+Name: cienciahoy
+Language: Python 3
+Branch: master
+Region: Oregon (déjalo)
+Build Command: pip install fastapi uvicorn aiofiles requests
+Start Command: uvicorn web:app --host 0.0.0.0 --port $PORT
+
+Selecciona Free ($0/month). Luego haz clic en Create Web Service abajo del todo.Dijiste: Environment Variables
+
+No necesitas variables de entorno. Haz clic directamente en Deploy web service.
+
+Perfecto, está deployando. Espera unos 3-4 minutos a que termine.
+Cuando veas "Your service is live" o el log diga Application startup complete, abre:
+https://web-z9cv.onrender.com
+
+
+DONE ✅ Y sin palabras inventadas esta vez.
+Ahora subimos a GitHub y Render se actualiza solo:
+git add .
+git commit -m "nueva noticia"
+git push

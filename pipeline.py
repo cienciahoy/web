@@ -1,22 +1,30 @@
 """
 CienciaHoy — pipeline.py
-1 articulo, imagen hardcodeada por categoria, sin humanos posibles.
+Fuentes: arXiv + Semantic Scholar + Europe PMC + CORE
+Imagenes hardcodeadas, sin humanos posibles.
 """
 
-import json, time, sqlite3, hashlib, logging, requests, urllib.parse
+import json, time, sqlite3, hashlib, logging, requests, urllib.parse, random
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 from pathlib import Path
 
 DB_PATH      = Path(__file__).parent / "data.db"
 OLLAMA_URL   = "http://localhost:11434/api/generate"
-OLLAMA_MODEL = "mistral"
+OLLAMA_MODEL = "mistral:7b-instruct"
 
 PAPERS_PER_SOURCE    = 5
 MIN_RELEVANCE_SCORE  = 0.55
-MAX_ARTICLES_PER_DAY = 1
+MAX_ARTICLES_PER_DAY = 2
 
-ARXIV_CATEGORIES = ["cs.AI"]
+ARXIV_CATEGORIES = ["cs.AI", "q-bio.NC", "physics.app-ph"]
+
+SCIENCE_QUERIES = [
+    "artificial intelligence machine learning",
+    "neuroscience brain",
+    "materials science nanotechnology",
+    "climate energy sustainability",
+]
 
 IMAGES_DIR   = Path(__file__).parent / "static" / "images"
 IMAGES_DIR.mkdir(parents=True, exist_ok=True)
@@ -24,26 +32,24 @@ IMAGE_WIDTH  = 800
 IMAGE_HEIGHT = 500
 
 # ── PROMPTS DE IMAGEN 100% HARDCODEADOS — NUNCA HUMANOS ──────────────────────
-# Rotamos entre varios para variedad. Todos son objetos/naturaleza/macro.
 
 IMAGE_PROMPTS = {
     "cs.AI": [
         "glowing fiber optic cables macro close-up blue light",
         "computer circuit board macro green traces copper",
         "server rack data center blinking LED lights",
-        "abstract binary data stream floating blue dark background",
         "microchip processor macro photography extreme detail",
+        "abstract binary data stream floating blue dark background",
     ],
     "cs.LG": [
         "colorful neural network diagram glowing nodes dark background",
-        "computer monitor showing colorful graphs and code no people",
         "data visualization abstract colorful chart macro",
         "electronic circuit board close-up macro photography",
         "glowing computer chip semiconductor wafer macro",
     ],
     "physics.app-ph": [
         "laboratory glass beakers chemical liquids colorful macro",
-        "laser beam splitting prism physics experiment",
+        "laser beam splitting prism physics experiment no people",
         "oscilloscope screen showing wave patterns close-up",
         "magnetic field iron filings pattern macro photography",
         "optical fiber light transmission macro close-up",
@@ -53,25 +59,21 @@ IMAGE_PROMPTS = {
         "metal surface electron microscope texture detail",
         "graphene nanotube structure visualization macro",
         "polymer material surface macro photography",
-        "alloy metal cross section microscope detail",
     ],
     "eess.SY": [
         "solar panel array desert landscape golden hour",
         "wind turbines field sunset dramatic sky",
-        "power grid electrical transformer station",
         "lithium battery cells close-up macro photography",
-        "smart meter electrical equipment close-up",
+        "power grid electrical transformer station",
     ],
     "q-bio.NC": [
         "neuron synapse fluorescence microscopy colorful",
         "brain tissue slice stained microscopy purple blue",
         "DNA double helix macro visualization colorful",
         "cell division mitosis fluorescence microscopy",
-        "MRI brain scan cross section colorful",
     ],
     "science.general": [
         "laboratory glassware flask beakers colorful liquids",
-        "periodic table elements close-up macro",
         "microscope lens close-up laboratory equipment",
         "test tubes colorful chemicals laboratory",
         "scientific instrument dial gauge close-up macro",
@@ -80,11 +82,9 @@ IMAGE_PROMPTS = {
         "plant cell chloroplast fluorescence microscopy green",
         "bacteria culture petri dish laboratory macro",
         "DNA gel electrophoresis bands laboratory",
-        "enzyme protein structure colorful visualization",
         "cell membrane lipid bilayer macro visualization",
     ],
     "science.astronomy": [
-        "telescope mirror reflective surface close-up macro",
         "star field deep space nebula colorful astronomy",
         "galaxy spiral arms long exposure photography",
         "radio telescope dish array landscape",
@@ -94,13 +94,11 @@ IMAGE_PROMPTS = {
 
 DEFAULT_PROMPTS = [
     "laboratory glassware colorful chemicals macro close-up",
-    "scientific equipment metal instruments close-up",
     "crystal mineral macro photography colorful detail",
     "fiber optic cables light macro close-up blue",
     "circuit board electronic components macro photography",
+    "scientific equipment metal instruments close-up",
 ]
-
-import random
 
 def get_image_prompt(category: str) -> str:
     prompts = IMAGE_PROMPTS.get(category, DEFAULT_PROMPTS)
@@ -126,10 +124,10 @@ log = logging.getLogger("cienciahoy")
 
 def check_ollama() -> bool:
     try:
-        r = requests.get("http://localhost:11434/api/tags", timeout=5)
+        r     = requests.get("http://localhost:11434/api/tags", timeout=5)
         models = [m["name"] for m in r.json().get("models", [])]
         match  = any(OLLAMA_MODEL in m for m in models)
-        log.info("Ollama OK" if match else "Modelo no encontrado")
+        log.info("Ollama OK — modelo: %s", OLLAMA_MODEL) if match else log.warning("Modelo no encontrado")
         return match
     except Exception as e:
         log.error("Ollama no responde: %s", e)
@@ -154,13 +152,17 @@ def ask_ollama(prompt: str, timeout: int = 120) -> str:
     return ""
 
 def clean_json(text: str) -> str:
+    import re
     text = text.strip()
     if "```" in text:
         p    = text.split("```")[1].strip()
         text = p[4:].strip() if p.lower().startswith("json") else p
     s, e = text.find("{"), text.rfind("}")
-    return text[s:e+1].strip() if s != -1 and e > s else text
-
+    if s != -1 and e > s:
+        text = text[s:e+1].strip()
+    # eliminar caracteres de control que rompen JSON
+    text = re.sub(r'[\x00-\x08\x0b\x0c\x0e-\x1f]', '', text)
+    return text
 # ── DB ────────────────────────────────────────────────────────────────────────
 
 def init_db():
@@ -224,10 +226,10 @@ def save_papers(papers: list, source: str = "arxiv") -> int:
             log.warning("save_papers error: %s", e)
     con.commit()
     con.close()
-    log.info("  -> %d nuevos", n)
+    log.info("  -> %d nuevos de %s", n, source)
     return n
 
-# ── SCOUT ─────────────────────────────────────────────────────────────────────
+# ── FUENTE 1: arXiv ──────────────────────────────────────────────────────────
 
 def scout_arxiv(category: str) -> list:
     url    = "https://export.arxiv.org/api/query"
@@ -239,7 +241,7 @@ def scout_arxiv(category: str) -> list:
     }
     log.info("Scout arXiv: %s", category)
     try:
-        r = requests.get(url, params=params, timeout=30)
+        r = requests.get(url, params=params, timeout=40)
         r.raise_for_status()
     except Exception as e:
         log.warning("arXiv error: %s", e)
@@ -264,6 +266,129 @@ def scout_arxiv(category: str) -> list:
             "arxiv_url":  "https://arxiv.org/abs/" + pid.replace("_", "/"),
             "published":  entry.findtext("atom:published", "", ns),
             "source":     "arxiv",
+            "fetched_at": datetime.now(timezone.utc).isoformat(),
+        })
+    log.info("  -> %d papers", len(papers))
+    return papers
+
+# ── FUENTE 2: Semantic Scholar ────────────────────────────────────────────────
+
+def scout_semantic_scholar(query: str) -> list:
+    url    = "https://api.semanticscholar.org/graph/v1/paper/search"
+    params = {
+        "query":  query,
+        "limit":  PAPERS_PER_SOURCE,
+        "fields": "paperId,title,abstract,authors,year,externalIds,publicationDate",
+        "sort":   "relevance",
+    }
+    log.info("Scout Semantic Scholar: %s", query[:50])
+    try:
+        r = requests.get(url, params=params, timeout=30,
+                         headers={"User-Agent": "CienciaHoy/1.0"})
+        r.raise_for_status()
+        data = r.json().get("data", [])
+    except Exception as e:
+        log.warning("Semantic Scholar error: %s", e)
+        return []
+
+    papers = []
+    for p in data:
+        if not p.get("abstract"):
+            continue
+        pid      = "ss_" + p["paperId"]
+        arxiv_id = (p.get("externalIds") or {}).get("ArXiv", "")
+        url_p    = ("https://arxiv.org/abs/" + arxiv_id) if arxiv_id else \
+                   ("https://www.semanticscholar.org/paper/" + p["paperId"])
+        papers.append({
+            "id":         pid,
+            "title":      (p.get("title") or "").strip(),
+            "abstract":   (p.get("abstract") or "").strip()[:2000],
+            "authors":    json.dumps([a.get("name", "") for a in (p.get("authors") or [])[:5]]),
+            "category":   "science.general",
+            "arxiv_url":  url_p,
+            "published":  p.get("publicationDate") or str(p.get("year", "")),
+            "source":     "semantic_scholar",
+            "fetched_at": datetime.now(timezone.utc).isoformat(),
+        })
+    log.info("  -> %d papers", len(papers))
+    time.sleep(2)
+    return papers
+
+# ── FUENTE 3: Europe PMC ─────────────────────────────────────────────────────
+
+def scout_europe_pmc(query: str) -> list:
+    url    = "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
+    params = {
+        "query":      query + " OPEN_ACCESS:Y",
+        "resultType": "core",
+        "pageSize":   PAPERS_PER_SOURCE,
+        "format":     "json",
+        "sort":       "FIRST_PDATE desc",
+    }
+    log.info("Scout Europe PMC: %s", query[:50])
+    try:
+        r = requests.get(url, params=params, timeout=30)
+        r.raise_for_status()
+        results = r.json().get("resultList", {}).get("result", [])
+    except Exception as e:
+        log.warning("Europe PMC error: %s", e)
+        return []
+
+    papers = []
+    for p in results:
+        abstract = p.get("abstractText", "") or p.get("abstract", "")
+        if not abstract:
+            continue
+        pid   = "epmc_" + str(p.get("id", p.get("pmid", "")))
+        doi   = p.get("doi", "")
+        url_p = ("https://doi.org/" + doi) if doi else \
+                ("https://europepmc.org/article/" + str(p.get("source", "")) + "/" + str(p.get("id", "")))
+        papers.append({
+            "id":         pid,
+            "title":      (p.get("title") or "").strip().rstrip("."),
+            "abstract":   abstract.strip()[:2000],
+            "authors":    json.dumps([a.get("fullName", "") for a in (p.get("authorList", {}).get("author") or [])[:5]]),
+            "category":   "science.life",
+            "arxiv_url":  url_p,
+            "published":  p.get("firstPublicationDate", ""),
+            "source":     "europe_pmc",
+            "fetched_at": datetime.now(timezone.utc).isoformat(),
+        })
+    log.info("  -> %d papers", len(papers))
+    return papers
+
+# ── FUENTE 4: CORE ───────────────────────────────────────────────────────────
+
+def scout_core(query: str) -> list:
+    url    = "https://api.core.ac.uk/v3/search/works"
+    params = {"q": query, "limit": PAPERS_PER_SOURCE, "sort": "recency"}
+    log.info("Scout CORE: %s", query[:50])
+    try:
+        r = requests.get(url, params=params, timeout=30,
+                         headers={"User-Agent": "CienciaHoy/1.0"})
+        r.raise_for_status()
+        results = r.json().get("results", [])
+    except Exception as e:
+        log.warning("CORE error: %s", e)
+        return []
+
+    papers = []
+    for p in results:
+        abstract = p.get("abstract", "")
+        if not abstract or len(abstract) < 80:
+            continue
+        pid   = "core_" + str(p.get("id", ""))
+        urls  = p.get("sourceFulltextUrls") or []
+        url_p = p.get("downloadUrl") or (urls[0] if urls else "")
+        papers.append({
+            "id":         pid,
+            "title":      (p.get("title") or "").strip(),
+            "abstract":   abstract.strip()[:2000],
+            "authors":    json.dumps([a.get("name", "") for a in (p.get("authors") or [])[:5]]),
+            "category":   "science.general",
+            "arxiv_url":  url_p,
+            "published":  str(p.get("publishedDate") or p.get("yearPublished", ""))[:10],
+            "source":     "core",
             "fetched_at": datetime.now(timezone.utc).isoformat(),
         })
     log.info("  -> %d papers", len(papers))
@@ -326,15 +451,21 @@ def filter_papers() -> list:
 # ── WRITER ────────────────────────────────────────────────────────────────────
 
 WRITER_PROMPT = """\
-Eres periodista cientifico. Convierte este paper en noticia en espanol para publico general.
+Eres periodista cientifico experto. Convierte este paper en noticia en espanol para publico general.
+Usa palabras reales del diccionario. Nunca inventes palabras.
+
 Devuelve SOLO este JSON sin texto extra ni markdown:
+
 {
   "headline": "Titular atractivo maximo 12 palabras",
-  "summary": "Una frase resumen para portada maxim 20 palabras",
-  "body": "Noticia de 150 palabras: que se descubrio, como, por que importa, limitaciones. Sin jeroglifos ni caracteres raros."
+  "summary": "Una frase resumen para portada maximo 20 palabras",
+  "body": "Articulo periodistico de 400 a 500 palabras en espanol. Explica claramente que se descubrio, como se hizo el descubrimiento, por que importa, cuales son las limitaciones y que podria ocurrir en el futuro. Usa estructura de articulo real con: contexto inicial, descripcion del descubrimiento, explicacion de como funciona o como se logro, impacto cientifico o tecnologico, limitaciones actuales y perspectivas futuras. Mantener tono profesional, claro y natural, como una noticia de ciencia o tecnologia publicada en un medio reconocido. Sin jeroglifos, simbolos raros ni caracteres extranos. Solo palabras reales en espanol. Al final del articulo agrega una seccion llamada 'Paper original' con: nombre completo del paper, autores y enlace de lectura del trabajo fuente."
 }
+
 TITULO: TITULO_PAPER
+
 ABSTRACT: ABSTRACT_PAPER
+
 """
 
 def write_articles(papers: list) -> list:
@@ -343,8 +474,8 @@ def write_articles(papers: list) -> list:
         aid    = hashlib.sha1(p["id"].encode()).hexdigest()[:12]
         prompt = (WRITER_PROMPT
                   .replace("TITULO_PAPER",   p["title"])
-                  .replace("ABSTRACT_PAPER", p["abstract"]))
-        raw = ask_ollama(prompt, timeout=180)
+                  .replace("ABSTRACT_PAPER", p["abstract"][:800]))
+        raw = ask_ollama(prompt, timeout=540)
 
         if not raw:
             log.warning("Writer sin respuesta: %s", p["title"][:60])
@@ -360,7 +491,6 @@ def write_articles(papers: list) -> list:
             log.warning("Writer incompleto")
             continue
 
-        # Imagen 100% hardcodeada — Ollama no toca esto
         image_prompt = get_image_prompt(p["category"])
 
         articles.append({
@@ -415,7 +545,7 @@ def generate_images(articles: list):
             f"https://image.pollinations.ai/prompt/{encoded}"
             f"?width={IMAGE_WIDTH}&height={IMAGE_HEIGHT}&model=flux&nologo=true&enhance=true&seed={random.randint(1,9999)}"
         )
-        log.info("generando imagen para: %s", a["headline"][:50])
+        log.info("generando imagen: %s", a["headline"][:50])
 
         ok = False
         for attempt in range(3):
@@ -452,10 +582,32 @@ def run_pipeline():
 
     init_db()
 
-    log.info("── Scout ────────────────────────────")
+    # ── arXiv ────────────────────────────────────────────────────────────────
+    log.info("── Scout arXiv ──────────────────────")
     for cat in ARXIV_CATEGORIES:
         papers = scout_arxiv(cat)
         save_papers(papers, "arxiv")
+        time.sleep(4)  # respetar rate limit arXiv
+
+    # ── Semantic Scholar ──────────────────────────────────────────────────────
+    log.info("── Scout Semantic Scholar ───────────")
+    for q in random.sample(SCIENCE_QUERIES, min(2, len(SCIENCE_QUERIES))):
+        papers = scout_semantic_scholar(q)
+        save_papers(papers, "semantic_scholar")
+        time.sleep(2)
+
+    # ── Europe PMC ───────────────────────────────────────────────────────────
+    log.info("── Scout Europe PMC ─────────────────")
+    for q in random.sample(SCIENCE_QUERIES, min(1, len(SCIENCE_QUERIES))):
+        papers = scout_europe_pmc(q)
+        save_papers(papers, "europe_pmc")
+        time.sleep(2)
+
+    # ── CORE ─────────────────────────────────────────────────────────────────
+    log.info("── Scout CORE ───────────────────────")
+    for q in random.sample(SCIENCE_QUERIES, min(1, len(SCIENCE_QUERIES))):
+        papers = scout_core(q)
+        save_papers(papers, "core")
         time.sleep(2)
 
     con     = get_db()
@@ -475,7 +627,7 @@ def run_pipeline():
 
     relevant.sort(key=lambda x: x.get("score", 0), reverse=True)
     top = relevant[:MAX_ARTICLES_PER_DAY]
-    log.info("Mejor paper: %s", top[0]["title"][:60])
+    log.info("Top %d papers seleccionados", len(top))
 
     log.info("── Writer ───────────────────────────")
     articles = write_articles(top)
@@ -489,7 +641,17 @@ def run_pipeline():
     log.info("── Imagenes ─────────────────────────")
     generate_images(articles)
 
-    log.info("═══ DONE — 1 articulo listo ══════════")
+    log.info("═══ DONE — %d articulos nuevos listos ═══", len(articles))
 
 if __name__ == "__main__":
-    run_pipeline()
+    import sys
+    if "--scheduled" in sys.argv:
+        import schedule
+        log.info("Scheduler: pipeline diario a las 07:00")
+        schedule.every().day.at("07:00").do(run_pipeline)
+        run_pipeline()
+        while True:
+            schedule.run_pending()
+            time.sleep(60)
+    else:
+        run_pipeline()
