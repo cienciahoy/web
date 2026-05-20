@@ -112,6 +112,17 @@ def health():
     return {"status": "ok", "articles_file": ARTICLES_PATH.exists(), "count": len(load_articles())}
 
 
+@app.get("/debug")
+def debug():
+    import os
+    base = Path(__file__).parent
+    return {
+        "cwd": str(base),
+        "articles_path": str(ARTICLES_PATH),
+        "articles_exists": ARTICLES_PATH.exists(),
+        "files": os.listdir(base),
+    }
+    
 # ── CSS ───────────────────────────────────────────────────────────────────────
 
 CSS = """
