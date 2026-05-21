@@ -1,7 +1,8 @@
 """
 CienciaHoy — pipeline.py
 Fuentes: arXiv + Semantic Scholar + Europe PMC + CORE
-Imagenes hardcodeadas, sin humanos posibles.
+Escritura via Gemini API
+Imagenes via Unsplash API
 """
 
 import json, time, sqlite3, hashlib, logging, requests, urllib.parse, random
@@ -9,13 +10,19 @@ import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 from pathlib import Path
 
+
 DB_PATH      = Path(__file__).parent / "data.db"
-OLLAMA_URL   = "http://localhost:11434/api/generate"
-OLLAMA_MODEL = "mistral:7b-instruct"
+
+# ── KEYS ──────────────────────────────────────────────────────────────────────
+GEMINI_API_KEY   = "AIzaSyDW_S30JXWC6N5Uh2eHktAvkEZcmany9u8"
+UNSPLASH_API_KEY = "GRTNt5NFc4rbIRSJNiLPQvlEkqYplx0xNQDMNpizxjs"
+
+GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent"
+UNSPLASH_URL = "https://api.unsplash.com/photos/random"
 
 PAPERS_PER_SOURCE    = 5
 MIN_RELEVANCE_SCORE  = 0.55
-MAX_ARTICLES_PER_DAY = 2
+MAX_ARTICLES_PER_DAY = 6
 
 ARXIV_CATEGORIES = ["cs.AI", "q-bio.NC", "physics.app-ph"]
 
@@ -31,85 +38,25 @@ IMAGES_DIR.mkdir(parents=True, exist_ok=True)
 IMAGE_WIDTH  = 800
 IMAGE_HEIGHT = 500
 
-# ── PROMPTS DE IMAGEN 100% HARDCODEADOS — NUNCA HUMANOS ──────────────────────
+# ── QUERIES DE UNSPLASH POR CATEGORIA ────────────────────────────────────────
 
-IMAGE_PROMPTS = {
-    "cs.AI": [
-        "glowing fiber optic cables macro close-up blue light",
-        "computer circuit board macro green traces copper",
-        "server rack data center blinking LED lights",
-        "microchip processor macro photography extreme detail",
-        "abstract binary data stream floating blue dark background",
-    ],
-    "cs.LG": [
-        "colorful neural network diagram glowing nodes dark background",
-        "data visualization abstract colorful chart macro",
-        "electronic circuit board close-up macro photography",
-        "glowing computer chip semiconductor wafer macro",
-    ],
-    "physics.app-ph": [
-        "laboratory glass beakers chemical liquids colorful macro",
-        "laser beam splitting prism physics experiment no people",
-        "oscilloscope screen showing wave patterns close-up",
-        "magnetic field iron filings pattern macro photography",
-        "optical fiber light transmission macro close-up",
-    ],
-    "cond-mat.mtrl-sci": [
-        "crystal structure mineral macro photography colorful",
-        "metal surface electron microscope texture detail",
-        "graphene nanotube structure visualization macro",
-        "polymer material surface macro photography",
-    ],
-    "eess.SY": [
-        "solar panel array desert landscape golden hour",
-        "wind turbines field sunset dramatic sky",
-        "lithium battery cells close-up macro photography",
-        "power grid electrical transformer station",
-    ],
-    "q-bio.NC": [
-        "neuron synapse fluorescence microscopy colorful",
-        "brain tissue slice stained microscopy purple blue",
-        "DNA double helix macro visualization colorful",
-        "cell division mitosis fluorescence microscopy",
-    ],
-    "science.general": [
-        "laboratory glassware flask beakers colorful liquids",
-        "microscope lens close-up laboratory equipment",
-        "test tubes colorful chemicals laboratory",
-        "scientific instrument dial gauge close-up macro",
-    ],
-    "science.life": [
-        "plant cell chloroplast fluorescence microscopy green",
-        "bacteria culture petri dish laboratory macro",
-        "DNA gel electrophoresis bands laboratory",
-        "cell membrane lipid bilayer macro visualization",
-    ],
-    "science.astronomy": [
-        "star field deep space nebula colorful astronomy",
-        "galaxy spiral arms long exposure photography",
-        "radio telescope dish array landscape",
-        "planetary surface texture macro geology",
-    ],
+UNSPLASH_QUERIES = {
+    "cs.AI":             ["circuit board macro", "computer chip technology", "fiber optic cables", "server data center"],
+    "cs.LG":             ["data visualization", "computer screen code", "neural network technology", "abstract digital"],
+    "physics.app-ph":    ["physics laboratory", "laser light experiment", "scientific instrument", "optics prism light"],
+    "cond-mat.mtrl-sci": ["crystal mineral macro", "metal surface texture", "material science lab", "nanotechnology microscope"],
+    "eess.SY":           ["solar panel energy", "wind turbine renewable", "battery technology", "power grid electricity"],
+    "q-bio.NC":          ["neuroscience brain", "microscopy laboratory", "DNA molecule", "cell biology fluorescence"],
+    "science.general":   ["science laboratory", "research experiment", "scientific equipment", "chemistry lab"],
+    "science.life":      ["biology laboratory", "plant cell microscope", "bacteria petri dish", "DNA research"],
+    "science.astronomy": ["telescope observatory", "space nebula stars", "galaxy astronomy", "radio telescope"],
 }
 
-DEFAULT_PROMPTS = [
-    "laboratory glassware colorful chemicals macro close-up",
-    "crystal mineral macro photography colorful detail",
-    "fiber optic cables light macro close-up blue",
-    "circuit board electronic components macro photography",
-    "scientific equipment metal instruments close-up",
-]
+DEFAULT_UNSPLASH_QUERIES = ["science laboratory", "research technology", "microscope science", "laboratory equipment"]
 
-def get_image_prompt(category: str) -> str:
-    prompts = IMAGE_PROMPTS.get(category, DEFAULT_PROMPTS)
-    base    = random.choice(prompts)
-    suffix  = (
-        ", photorealistic, documentary photography, natural lighting, "
-        "Canon EOS R5, 100mm macro lens, high resolution, sharp focus, "
-        "no text, no watermark, no humans, no people, no hands, no faces, "
-        "no bodies, no illustration, no cartoon, no digital art, no painting"
-    )
-    return base + suffix
+def get_unsplash_query(category: str) -> str:
+    queries = UNSPLASH_QUERIES.get(category, DEFAULT_UNSPLASH_QUERIES)
+    return random.choice(queries)
 
 # ── LOGGING ───────────────────────────────────────────────────────────────────
 
@@ -120,35 +67,40 @@ logging.basicConfig(
 )
 log = logging.getLogger("cienciahoy")
 
-# ── OLLAMA ────────────────────────────────────────────────────────────────────
+# ── GEMINI ────────────────────────────────────────────────────────────────────
 
-def check_ollama() -> bool:
+def check_gemini() -> bool:
     try:
-        r     = requests.get("http://localhost:11434/api/tags", timeout=5)
-        models = [m["name"] for m in r.json().get("models", [])]
-        match  = any(OLLAMA_MODEL in m for m in models)
-        log.info("Ollama OK — modelo: %s", OLLAMA_MODEL) if match else log.warning("Modelo no encontrado")
-        return match
+        r = requests.post(
+            GEMINI_URL,
+            params={"key": GEMINI_API_KEY},
+            json={"contents": [{"parts": [{"text": "di ok"}]}]},
+            timeout=10,
+        )
+        r.raise_for_status()
+        log.info("Gemini OK")
+        return True
     except Exception as e:
-        log.error("Ollama no responde: %s", e)
+        log.error("Gemini no responde: %s", e)
         return False
-
-def ask_ollama(prompt: str, timeout: int = 120) -> str:
+        
+def ask_gemini(prompt: str, timeout: int = 60) -> str:
     for attempt in range(2):
         try:
-            r    = requests.post(
-                OLLAMA_URL,
-                json={"model": OLLAMA_MODEL, "prompt": prompt, "stream": False},
+            r = requests.post(
+                GEMINI_URL,
+                params={"key": GEMINI_API_KEY},
+                json={"contents": [{"parts": [{"text": prompt}]}]},
                 timeout=timeout,
             )
-            resp = r.json().get("response", "").strip()
-            if resp:
-                return resp
-        except requests.exceptions.Timeout:
-            log.warning("Ollama timeout (intento %d/2)", attempt + 1)
+            r.raise_for_status()
+            text = r.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
+            if text:
+                time.sleep(4)  # pausa para no exceder rate limit
+                return text
         except Exception as e:
-            log.warning("Ollama error: %s", e)
-        time.sleep(3)
+            log.warning("Gemini error (intento %d/2): %s", attempt + 1, e)
+            time.sleep(10)  # pausa larga si hay error
     return ""
 
 def clean_json(text: str) -> str:
@@ -160,9 +112,9 @@ def clean_json(text: str) -> str:
     s, e = text.find("{"), text.rfind("}")
     if s != -1 and e > s:
         text = text[s:e+1].strip()
-    # eliminar caracteres de control que rompen JSON
     text = re.sub(r'[\x00-\x08\x0b\x0c\x0e-\x1f]', '', text)
     return text
+
 # ── DB ────────────────────────────────────────────────────────────────────────
 
 def init_db():
@@ -420,7 +372,7 @@ def filter_papers() -> list:
         prompt = (FILTER_PROMPT
                   .replace("TITULO_PAPER",   p.get("title", ""))
                   .replace("ABSTRACT_PAPER", p.get("abstract", "")))
-        raw    = ask_ollama(prompt, timeout=120)
+        raw    = ask_gemini(prompt)
 
         score  = 0.0
         result = {}
@@ -459,7 +411,7 @@ Devuelve SOLO este JSON sin texto extra ni markdown:
 {
   "headline": "Titular atractivo maximo 12 palabras",
   "summary": "Una frase resumen para portada maximo 20 palabras",
-  "body": "Articulo periodistico de 400 a 500 palabras en espanol. Explica claramente que se descubrio, como se hizo el descubrimiento, por que importa, cuales son las limitaciones y que podria ocurrir en el futuro. Usa estructura de articulo real con: contexto inicial, descripcion del descubrimiento, explicacion de como funciona o como se logro, impacto cientifico o tecnologico, limitaciones actuales y perspectivas futuras. Mantener tono profesional, claro y natural, como una noticia de ciencia o tecnologia publicada en un medio reconocido. Sin jeroglifos, simbolos raros ni caracteres extranos. Solo palabras reales en espanol. Al final del articulo agrega una seccion llamada 'Paper original' con: nombre completo del paper, autores y enlace de lectura del trabajo fuente."
+  "body": "Articulo periodistico de 400 a 500 palabras en espanol. Explica claramente que se descubrio, como se hizo el descubrimiento, por que importa, cuales son las limitaciones y que podria ocurrir en el futuro. Usa estructura de articulo real con: contexto inicial, descripcion del descubrimiento, explicacion de como funciona o como se logro, impacto cientifico o tecnologico, limitaciones actuales y perspectivas futuras. Mantener tono profesional, claro y natural, como una noticia de ciencia o tecnologia publicada en un medio reconocido. Sin jeroglifos, simbolos raros ni caracteres extranos. Solo palabras reales en espanol."
 }
 
 TITULO: TITULO_PAPER
@@ -475,7 +427,7 @@ def write_articles(papers: list) -> list:
         prompt = (WRITER_PROMPT
                   .replace("TITULO_PAPER",   p["title"])
                   .replace("ABSTRACT_PAPER", p["abstract"][:800]))
-        raw = ask_ollama(prompt, timeout=540)
+        raw = ask_gemini(prompt, timeout=60)
 
         if not raw:
             log.warning("Writer sin respuesta: %s", p["title"][:60])
@@ -491,19 +443,16 @@ def write_articles(papers: list) -> list:
             log.warning("Writer incompleto")
             continue
 
-        image_prompt = get_image_prompt(p["category"])
-
         articles.append({
-            "id":           aid,
-            "paper_id":     p["id"],
-            "headline":     result.get("headline", p["title"]),
-            "summary":      result.get("summary", ""),
-            "body":         result.get("body", ""),
-            "category":     p["category"],
-            "tags":         json.dumps(p.get("tags", [])),
-            "image_prompt": image_prompt,
+            "id":          aid,
+            "paper_id":    p["id"],
+            "headline":    result.get("headline", p["title"]),
+            "summary":     result.get("summary", ""),
+            "body":        result.get("body", ""),
+            "category":    p["category"],
+            "tags":        json.dumps(p.get("tags", [])),
             "published_at": datetime.now(timezone.utc).isoformat(),
-            "status":       "published",
+            "status":      "published",
         })
         log.info("Articulo: %s", result.get("headline", "")[:60])
 
@@ -518,48 +467,55 @@ def editor_publish(articles: list):
     for a in articles[:MAX_ARTICLES_PER_DAY]:
         con.execute(
             "INSERT OR REPLACE INTO articles "
-            "(id,paper_id,headline,summary,body,category,tags,image_prompt,published_at,status) "
-            "VALUES (?,?,?,?,?,?,?,?,?,?)",
+            "(id,paper_id,headline,summary,body,category,tags,published_at,status) "
+            "VALUES (?,?,?,?,?,?,?,?,?)",
             (a["id"], a["paper_id"], a["headline"], a["summary"],
              a["body"], a["category"], a["tags"],
-             a["image_prompt"], a["published_at"], "published"),
+             a["published_at"], "published"),
         )
         n += 1
     con.commit()
     con.close()
     log.info("Editor: %d articulos publicados", n)
 
-# ── IMAGE GEN ─────────────────────────────────────────────────────────────────
+# ── IMAGE GEN via UNSPLASH ────────────────────────────────────────────────────
 
 def generate_images(articles: list):
-    log.info("── Generando imagenes ───────────────")
+    log.info("── Descargando imagenes Unsplash ────")
     for a in articles:
         dest = IMAGES_DIR / f"{a['id']}.jpg"
         if dest.exists():
             log.info("imagen ya existe: %s", a["id"])
             continue
 
-        prompt  = a["image_prompt"]
-        encoded = urllib.parse.quote(prompt, safe="")
-        url     = (
-            f"https://image.pollinations.ai/prompt/{encoded}"
-            f"?width={IMAGE_WIDTH}&height={IMAGE_HEIGHT}&model=flux&nologo=true&enhance=true&seed={random.randint(1,9999)}"
-        )
-        log.info("generando imagen: %s", a["headline"][:50])
+        query = get_unsplash_query(a["category"])
+        log.info("buscando imagen: '%s' para: %s", query, a["headline"][:40])
 
         ok = False
         for attempt in range(3):
             try:
-                r = requests.get(url, timeout=90, stream=True)
+                r = requests.get(
+                    UNSPLASH_URL,
+                    params={
+                        "query":       query,
+                        "orientation": "landscape",
+                        "w":           IMAGE_WIDTH,
+                        "h":           IMAGE_HEIGHT,
+                    },
+                    headers={"Authorization": f"Client-ID {UNSPLASH_API_KEY}"},
+                    timeout=30,
+                )
                 r.raise_for_status()
-                if "image" not in r.headers.get("content-type", ""):
-                    time.sleep(5)
-                    continue
+                data     = r.json()
+                img_url  = data["urls"]["regular"]
+
+                img = requests.get(img_url, timeout=60, stream=True)
+                img.raise_for_status()
                 with open(dest, "wb") as f:
-                    for chunk in r.iter_content(chunk_size=8192):
+                    for chunk in img.iter_content(chunk_size=8192):
                         f.write(chunk)
                 size_kb = dest.stat().st_size // 1024
-                log.info("✓ imagen guardada (%d KB)", size_kb)
+                log.info("✓ imagen guardada (%d KB) — foto de %s", size_kb, data.get("user", {}).get("name", "?"))
                 ok = True
                 break
             except Exception as e:
@@ -569,41 +525,55 @@ def generate_images(articles: list):
         if not ok:
             log.warning("✗ imagen fallida para %s", a["id"])
 
-        time.sleep(3)
+        time.sleep(1)
+
+# ── EXPORT ────────────────────────────────────────────────────────────────────
+
+def export_json():
+    con  = get_db()
+    rows = con.execute("SELECT * FROM articles WHERE status='published' ORDER BY published_at DESC").fetchall()
+    con.close()
+    articles = []
+    for r in rows:
+        d = dict(r)
+        try:
+            d["tags"] = json.loads(d.get("tags", "[]"))
+        except Exception:
+            d["tags"] = []
+        articles.append(d)
+    out = Path(__file__).parent / "articles.json"
+    out.write_text(json.dumps(articles, ensure_ascii=False, indent=2), encoding="utf-8")
+    log.info("Exportado articles.json — %d articulos", len(articles))
 
 # ── PIPELINE ──────────────────────────────────────────────────────────────────
 
 def run_pipeline():
     log.info("═══ PIPELINE START ═══════════════════")
 
-    if not check_ollama():
-        log.error("Abortando: Ollama no disponible.")
+    if not check_gemini():
+        log.error("Abortando: Gemini no disponible.")
         return
 
     init_db()
 
-    # ── arXiv ────────────────────────────────────────────────────────────────
     log.info("── Scout arXiv ──────────────────────")
     for cat in ARXIV_CATEGORIES:
         papers = scout_arxiv(cat)
         save_papers(papers, "arxiv")
-        time.sleep(4)  # respetar rate limit arXiv
+        time.sleep(4)
 
-    # ── Semantic Scholar ──────────────────────────────────────────────────────
     log.info("── Scout Semantic Scholar ───────────")
     for q in random.sample(SCIENCE_QUERIES, min(2, len(SCIENCE_QUERIES))):
         papers = scout_semantic_scholar(q)
         save_papers(papers, "semantic_scholar")
         time.sleep(2)
 
-    # ── Europe PMC ───────────────────────────────────────────────────────────
     log.info("── Scout Europe PMC ─────────────────")
     for q in random.sample(SCIENCE_QUERIES, min(1, len(SCIENCE_QUERIES))):
         papers = scout_europe_pmc(q)
         save_papers(papers, "europe_pmc")
         time.sleep(2)
 
-    # ── CORE ─────────────────────────────────────────────────────────────────
     log.info("── Scout CORE ───────────────────────")
     for q in random.sample(SCIENCE_QUERIES, min(1, len(SCIENCE_QUERIES))):
         papers = scout_core(q)
@@ -617,12 +587,14 @@ def run_pipeline():
 
     if pending == 0:
         log.info("Nada nuevo que procesar.")
+        export_json()
         return
 
     log.info("── Filter ───────────────────────────")
     relevant = filter_papers()
     if not relevant:
         log.warning("Ningun paper supero el umbral.")
+        export_json()
         return
 
     relevant.sort(key=lambda x: x.get("score", 0), reverse=True)
@@ -633,6 +605,7 @@ def run_pipeline():
     articles = write_articles(top)
     if not articles:
         log.warning("El writer no genero articulos.")
+        export_json()
         return
 
     log.info("── Editor ───────────────────────────")
@@ -642,24 +615,9 @@ def run_pipeline():
     generate_images(articles)
 
     export_json()
-    
+
     log.info("═══ DONE — %d articulos nuevos listos ═══", len(articles))
 
-def export_json():
-    con  = get_db()
-    rows = con.execute("SELECT * FROM articles WHERE status='published' ORDER BY published_at DESC").fetchall()
-    con.close()
-    articles = []
-    for r in rows:
-        d = dict(r)
-        try:
-            d["tags"] = json.loads(d.get("tags", "[]"))
-        except:
-            d["tags"] = []
-        articles.append(d)
-    out = Path(__file__).parent / "articles.json"
-    out.write_text(json.dumps(articles, ensure_ascii=False, indent=2), encoding="utf-8")
-    log.info("Exportado articles.json — %d articulos", len(articles))
 
 if __name__ == "__main__":
     import sys

@@ -16,10 +16,7 @@ Arrancar en 5 pasos
 
 1. Instalar dependencias
 pip install httpx schedule fastapi uvicorn requests
-2. Instalar Ollama
 
-
-ollama serve
 3. Inicializar la base de datos (con ejemplos)
 python init_db.py
 

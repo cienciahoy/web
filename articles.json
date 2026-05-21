@@ -1,55 +1,20 @@
 [
   {
-    "id": "982856e262c9",
-    "paper_id": "core_159540978",
-    "headline": "Nuevo sensor de glucosa autopoderizado: Una sorpresa en el mundo de la tecnología",
-    "summary": "Un equipo de investigadores presentó un sensor de glucosa que funciona sin energía externa y es más eficiente gracias a materiales compuestos bimetálicos en las electrodos.",
-    "body": "El equipo, liderado por la Universidad de XYZ, ha creado un sensor de glucosa que funciona sin energía externa y es más eficiente gracias a materiales compuestos bimetálicos en las electrodos. Este diseño original permite un mayor rendimiento al integrar una capa sensible para la detección de glucosa (GOx) con una capa conductora (MWCNT y Fc). La protección adicional del sensor se logró mediante la aplicación de una capa de colágeno. Los resultados de cronoamperometría muestran que el nuevo sensor presenta una alta capacidad para medir niveles de glucosa en sangre con precisión.",
-    "category": "science.general",
-    "tags": [
-      "science",
-      "renewable energy",
-      "healthcare technology",
-      "biocatalysts"
-    ],
-    "image_prompt": "scientific instrument dial gauge close-up macro, photorealistic, documentary photography, natural lighting, Canon EOS R5, 100mm macro lens, high resolution, sharp focus, no text, no watermark, no humans, no people, no hands, no faces, no bodies, no illustration, no cartoon, no digital art, no painting",
-    "published_at": "2026-05-20T11:45:01.527118+00:00",
-    "status": "published"
-  },
-  {
-    "id": "16c1fc2fb4d7",
-    "paper_id": "arxiv_2605.20172v1",
-    "headline": "Planificación del sistema eléctrico a largo plazo mediante Programación de Conjuntos de Respuestas",
-    "summary": "Un estudio presenta una nueva forma de planificar el sistema eléctrico en escala larga para adaptarse a cambios en la demanda, la urbanización y los objetivos de sostenibilidad. La tarea es difícil de expresar en lenguajes de planificación actuales; sin embargo, puede ser encarnada con elegancia y brevedad mediante el uso del Programación de Conjuntos de Respuestas.",
-    "body": "El sistema eléctrico es una infraestructura crítica que soporta todas las facetas de la sociedad moderna. Mantener su eficacia requiere adaptaciones continuas. En particular, abordar objetivos de sostenibilidad, patrones de demanda y tendencias urbanas requieren cambios en la red. Los desarrollos actuales pueden potencialmente durar décadas, con la continuidad del suministro y calidad de servicio que deben ser preservados a lo largo del tiempo mediante el cumplimiento de varias invariantes topológicas y combinatorias. La planificación del sistema eléctrico en larga escala se enfoca en este proceso, aunque los lenguajes de planificación pudieran ser una elección natural, las propiedades y invariantes necesarias son difíciles de expresar en tales lenguajes; sin embargo, pueden ser encarnadas con elegancia y brevedad mediante el uso del Programación de Conjuntos de Respuestas. Este estudio presenta una nueva forma de planificar el sistema eléctrico en escala larga para adaptarse a los cambios en la demanda, la urbanización y los objetivos de sostenibilidad. La tarea es difícil de expresar en lenguajes de planificación actuales; sin embargo, puede ser encarnada con elegancia y brevedad mediante el uso del Programación de Conjuntos de Respuestas.",
+    "id": "b1f52d1aa1ff",
+    "paper_id": "arxiv_2605.21481v1",
+    "headline": "Inteligencia Artificial revoluciona la publicación científica con AiraXiv",
+    "summary": "Una nueva plataforma abierta usa IA para agilizar la investigación y revisión, uniendo a científicos humanos y máquinas.",
+    "body": "El imparable avance de la inteligencia artificial (IA) ha desatado una explosión de nuevos estudios, tanto de científicos humanos como de las propias máquinas. Este volumen masivo está saturando los sistemas de publicación académica tradicionales. Revistas y conferencias luchan con un aluvión de envíos y una carga de trabajo abrumadora para los revisores, ralentizando la difusión de descubrimientos y el progreso científico global.\n\nPara mitigar estos desafíos, investigadores proponen AiraXiv, una innovadora plataforma de acceso abierto impulsada por IA. Su objetivo: establecer un nuevo paradigma editorial donde científicos humanos e inteligencias artificiales colaboren activamente como autores y lectores. La visión es que los trabajos de investigación dejen de ser documentos estáticos, evolucionando continuamente mediante un ciclo de retroalimentación constante y dinámico.\n\nAiraXiv se sustenta en tres pilares clave: “preprints” abiertos para publicación inmediata; análisis y revisión “aumentados por IA”, donde algoritmos asisten en la evaluación y mejora de contenidos; e integración de retroalimentación continua de los lectores. La plataforma cuenta con una interfaz intuitiva para humanos y un “Protocolo de Contexto del Modelo” que permite a las IA interactuar directamente, consolidando una verdadera simbiosis.\n\nEsta iniciativa promete transformar la forma en que la ciencia se genera y comparte. AiraXiv podría desatascar los cuellos de botella de la publicación, permitiendo una difusión más rápida de descubrimientos y un progreso científico acelerado. Al integrar a las IA como participantes activos, abre nuevas vías para la co-creación de conocimiento. La creatividad humana y la capacidad analítica de las máquinas se fusionarían para explorar hipótesis y solucionar problemas a una escala y velocidad sin precedentes.\n\nAunque el potencial de AiraXiv es inmenso, enfrenta retos significativos. Será fundamental garantizar la calidad, fiabilidad y originalidad de las investigaciones con alta intervención de IA. La adopción masiva por parte de la comunidad científica requerirá confianza en este nuevo modelo. Además, surgen importantes consideraciones éticas sobre la autoría de la IA, la gestión de sesgos algorítmicos y la propiedad intelectual en un ecosistema donde humanos y máquinas son coautores y co-revisores.\n\nAiraXiv es más que una herramienta; es una visión de la próxima frontera de la investigación. Si supera sus desafíos, podría transformar la ciencia en un proceso orgánico y dinámico, con conocimiento que se actualiza y mejora constantemente. Nos acercaría a una era de descubrimientos exponenciales, donde la inteligencia humana y artificial se unen sinérgicamente para desentrañar misterios, formulando hipótesis y analizando datos de maneras inimaginables, llevando la exploración intelectual a límites completamente nuevos.",
     "category": "cs.AI",
     "tags": [
-      "power grid",
-      "sustainability",
-      "ASP",
-      "declarative programming",
-      "infrastructure"
+      "Inteligencia artificial",
+      "Publicación científica",
+      "Acceso abierto",
+      "Innovación",
+      "Futuro de la ciencia"
     ],
-    "image_prompt": "abstract binary data stream floating blue dark background, photorealistic, documentary photography, natural lighting, Canon EOS R5, 100mm macro lens, high resolution, sharp focus, no text, no watermark, no humans, no people, no hands, no faces, no bodies, no illustration, no cartoon, no digital art, no painting",
-    "published_at": "2026-05-20T11:04:45.384215+00:00",
-    "status": "published"
-  },
-  {
-    "id": "6366788208e1",
-    "paper_id": "arxiv_2605.20182v1",
-    "headline": "Descubrimiento de una representación universal para ondas cerebrales: Microestados",
-    "summary": "Un equipo de investigadores ha desarrollado un tokenizador universal de microestados a partir de datos EEG médicos, lo que puede revolucionar la neuroinformática y las interfaces computador-cerebro.",
-    "body": "En el campo de la neuroinformatica y de las interfaces computador-cerebro (BCIs), encontrar representaciones universales a partir de los datos de ondas cerebrales electroencefalogramas (EEG) es una aproximación a vanguardia. Tradicionalmente, el EEG se trata como un senyal multivariante temporal, donde se extraen características en el tiempo o en la frecuencia para el aprendizaje de representaciones. Este artículo investiga una representación de EEG sencilla pero efectiva: los microestados. Los microestados son los bloques básicos de patrones de actividad cerebral a escalas de tiempo microscópicas. Se ha construido un tokenizador universal de microestados a partir de un gran conjunto de datos EEG médico, al clustear señales continuas de EEG en secuencias de microestados discretos. El tokenizador de microestados se adopta entonces universalmente en una serie de tareas downstream, incluyendo el estudio del estado de sueño, la reconocimiento de emociones y otras aplicaciones. La importancia de este descubrimiento reside en que podría mejorar significativamente los sistemas BCIs, abriendo camino a nuevas posibilidades para la medicina y la tecnología.",
-    "category": "cs.AI",
-    "tags": [
-      "neuroinformatics",
-      "brain-computer interfaces",
-      "EEG",
-      "microstates",
-      "representation learning"
-    ],
-    "image_prompt": "server rack data center blinking LED lights, photorealistic, documentary photography, natural lighting, Canon EOS R5, 100mm macro lens, high resolution, sharp focus, no text, no watermark, no humans, no people, no hands, no faces, no bodies, no illustration, no cartoon, no digital art, no painting",
-    "published_at": "2026-05-20T11:01:59.614406+00:00",
+    "image_prompt": null,
+    "published_at": "2026-05-21T10:38:15.263126+00:00",
     "status": "published"
   }
 ]
