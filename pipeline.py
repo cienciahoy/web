@@ -1,8 +1,9 @@
 """
 CienciaHoy — pipeline.py
-Fuentes: arXiv + Semantic Scholar + Europe PMC + CORE
+Fuentes: arXiv + Semantic Scholar + Europe PMC + CORE + PubMed
 Escritura via Gemini API
 Imagenes via Unsplash API
+Categorias: Ciencia, Salud, Tecnologia
 """
 
 import json, time, sqlite3, hashlib, logging, requests, urllib.parse, random
@@ -10,27 +11,36 @@ import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 from pathlib import Path
 
-
 DB_PATH      = Path(__file__).parent / "data.db"
 
 # ── KEYS ──────────────────────────────────────────────────────────────────────
 GEMINI_API_KEY   = "AIzaSyDW_S30JXWC6N5Uh2eHktAvkEZcmany9u8"
 UNSPLASH_API_KEY = "GRTNt5NFc4rbIRSJNiLPQvlEkqYplx0xNQDMNpizxjs"
 
-GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent"
+GEMINI_URL   = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent"
 UNSPLASH_URL = "https://api.unsplash.com/photos/random"
 
 PAPERS_PER_SOURCE    = 5
 MIN_RELEVANCE_SCORE  = 0.55
 MAX_ARTICLES_PER_DAY = 6
 
-ARXIV_CATEGORIES = ["cs.AI", "q-bio.NC", "physics.app-ph"]
+ARXIV_CATEGORIES = ["cs.AI", "cs.LG", "cs.RO", "q-bio.NC", "physics.app-ph", "eess.SY"]
 
 SCIENCE_QUERIES = [
     "artificial intelligence machine learning",
     "neuroscience brain",
     "materials science nanotechnology",
     "climate energy sustainability",
+    "robotics autonomous systems",
+    "quantum computing semiconductor",
+]
+
+HEALTH_QUERIES = [
+    "cancer treatment therapy",
+    "drug discovery medicine",
+    "infectious disease vaccine",
+    "mental health depression anxiety",
+    "genetics genomics disease",
 ]
 
 IMAGES_DIR   = Path(__file__).parent / "static" / "images"
@@ -42,17 +52,20 @@ IMAGE_HEIGHT = 500
 
 UNSPLASH_QUERIES = {
     "cs.AI":             ["circuit board macro", "computer chip technology", "fiber optic cables", "server data center"],
-    "cs.LG":             ["data visualization", "computer screen code", "neural network technology", "abstract digital"],
-    "physics.app-ph":    ["physics laboratory", "laser light experiment", "scientific instrument", "optics prism light"],
-    "cond-mat.mtrl-sci": ["crystal mineral macro", "metal surface texture", "material science lab", "nanotechnology microscope"],
-    "eess.SY":           ["solar panel energy", "wind turbine renewable", "battery technology", "power grid electricity"],
-    "q-bio.NC":          ["neuroscience brain", "microscopy laboratory", "DNA molecule", "cell biology fluorescence"],
-    "science.general":   ["science laboratory", "research experiment", "scientific equipment", "chemistry lab"],
-    "science.life":      ["biology laboratory", "plant cell microscope", "bacteria petri dish", "DNA research"],
-    "science.astronomy": ["telescope observatory", "space nebula stars", "galaxy astronomy", "radio telescope"],
+    "cs.LG":             ["data visualization", "computer screen code", "abstract digital technology"],
+    "cs.RO":             ["robotics technology", "mechanical arm engineering", "automation industrial"],
+    "physics.app-ph":    ["physics laboratory", "laser light experiment", "scientific instrument"],
+    "cond-mat.mtrl-sci": ["crystal mineral macro", "metal surface texture", "nanotechnology microscope"],
+    "eess.SY":           ["solar panel energy", "wind turbine renewable", "battery technology"],
+    "q-bio.NC":          ["neuroscience brain", "microscopy laboratory", "DNA molecule"],
+    "science.general":   ["science laboratory", "research experiment", "scientific equipment"],
+    "science.life":      ["biology laboratory", "plant cell microscope", "bacteria petri dish"],
+    "science.astronomy": ["telescope observatory", "space nebula stars", "galaxy astronomy"],
+    "health":            ["medical research laboratory", "doctor medicine healthcare", "hospital technology"],
+    "technology":        ["technology innovation", "computer engineering", "digital future"],
 }
 
-DEFAULT_UNSPLASH_QUERIES = ["science laboratory", "research technology", "microscope science", "laboratory equipment"]
+DEFAULT_UNSPLASH_QUERIES = ["science laboratory", "research technology", "microscope science"]
 
 def get_unsplash_query(category: str) -> str:
     queries = UNSPLASH_QUERIES.get(category, DEFAULT_UNSPLASH_QUERIES)
@@ -83,7 +96,7 @@ def check_gemini() -> bool:
     except Exception as e:
         log.error("Gemini no responde: %s", e)
         return False
-        
+
 def ask_gemini(prompt: str, timeout: int = 60) -> str:
     for attempt in range(2):
         try:
@@ -96,11 +109,11 @@ def ask_gemini(prompt: str, timeout: int = 60) -> str:
             r.raise_for_status()
             text = r.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
             if text:
-                time.sleep(4)  # pausa para no exceder rate limit
+                time.sleep(4)
                 return text
         except Exception as e:
             log.warning("Gemini error (intento %d/2): %s", attempt + 1, e)
-            time.sleep(10)  # pausa larga si hay error
+            time.sleep(10)
     return ""
 
 def clean_json(text: str) -> str:
@@ -142,7 +155,6 @@ def init_db():
             body          TEXT,
             category      TEXT,
             tags          TEXT,
-            image_prompt  TEXT,
             published_at  TEXT,
             status        TEXT
         );
@@ -225,7 +237,7 @@ def scout_arxiv(category: str) -> list:
 
 # ── FUENTE 2: Semantic Scholar ────────────────────────────────────────────────
 
-def scout_semantic_scholar(query: str) -> list:
+def scout_semantic_scholar(query: str, category: str = "science.general") -> list:
     url    = "https://api.semanticscholar.org/graph/v1/paper/search"
     params = {
         "query":  query,
@@ -256,7 +268,7 @@ def scout_semantic_scholar(query: str) -> list:
             "title":      (p.get("title") or "").strip(),
             "abstract":   (p.get("abstract") or "").strip()[:2000],
             "authors":    json.dumps([a.get("name", "") for a in (p.get("authors") or [])[:5]]),
-            "category":   "science.general",
+            "category":   category,
             "arxiv_url":  url_p,
             "published":  p.get("publicationDate") or str(p.get("year", "")),
             "source":     "semantic_scholar",
@@ -268,7 +280,7 @@ def scout_semantic_scholar(query: str) -> list:
 
 # ── FUENTE 3: Europe PMC ─────────────────────────────────────────────────────
 
-def scout_europe_pmc(query: str) -> list:
+def scout_europe_pmc(query: str, category: str = "health") -> list:
     url    = "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
     params = {
         "query":      query + " OPEN_ACCESS:Y",
@@ -300,7 +312,7 @@ def scout_europe_pmc(query: str) -> list:
             "title":      (p.get("title") or "").strip().rstrip("."),
             "abstract":   abstract.strip()[:2000],
             "authors":    json.dumps([a.get("fullName", "") for a in (p.get("authorList", {}).get("author") or [])[:5]]),
-            "category":   "science.life",
+            "category":   category,
             "arxiv_url":  url_p,
             "published":  p.get("firstPublicationDate", ""),
             "source":     "europe_pmc",
@@ -311,7 +323,7 @@ def scout_europe_pmc(query: str) -> list:
 
 # ── FUENTE 4: CORE ───────────────────────────────────────────────────────────
 
-def scout_core(query: str) -> list:
+def scout_core(query: str, category: str = "science.general") -> list:
     url    = "https://api.core.ac.uk/v3/search/works"
     params = {"q": query, "limit": PAPERS_PER_SOURCE, "sort": "recency"}
     log.info("Scout CORE: %s", query[:50])
@@ -337,13 +349,86 @@ def scout_core(query: str) -> list:
             "title":      (p.get("title") or "").strip(),
             "abstract":   abstract.strip()[:2000],
             "authors":    json.dumps([a.get("name", "") for a in (p.get("authors") or [])[:5]]),
-            "category":   "science.general",
+            "category":   category,
             "arxiv_url":  url_p,
             "published":  str(p.get("publishedDate") or p.get("yearPublished", ""))[:10],
             "source":     "core",
             "fetched_at": datetime.now(timezone.utc).isoformat(),
         })
     log.info("  -> %d papers", len(papers))
+    return papers
+
+# ── FUENTE 5: PubMed ─────────────────────────────────────────────────────────
+
+def scout_pubmed(query: str) -> list:
+    log.info("Scout PubMed: %s", query[:50])
+    try:
+        # Buscar IDs
+        search = requests.get(
+            "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+            params={
+                "db":      "pubmed",
+                "term":    query,
+                "retmax":  PAPERS_PER_SOURCE,
+                "sort":    "date",
+                "retmode": "json",
+            },
+            timeout=30,
+        )
+        search.raise_for_status()
+        ids = search.json().get("esearchresult", {}).get("idlist", [])
+        if not ids:
+            log.info("  -> 0 papers")
+            return []
+
+        # Obtener detalles
+        fetch = requests.get(
+            "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+            params={
+                "db":      "pubmed",
+                "id":      ",".join(ids),
+                "retmode": "xml",
+            },
+            timeout=30,
+        )
+        fetch.raise_for_status()
+        root = ET.fromstring(fetch.text)
+
+    except Exception as e:
+        log.warning("PubMed error: %s", e)
+        return []
+
+    papers = []
+    for article in root.findall(".//PubmedArticle"):
+        try:
+            pmid    = article.findtext(".//PMID", "")
+            title   = article.findtext(".//ArticleTitle", "").strip()
+            abstr   = " ".join(t.text or "" for t in article.findall(".//AbstractText")).strip()[:2000]
+            if not title or not abstr:
+                continue
+            authors = []
+            for a in article.findall(".//Author")[:5]:
+                ln = a.findtext("LastName", "")
+                fn = a.findtext("ForeName", "")
+                if ln:
+                    authors.append(f"{ln} {fn}".strip())
+            pub_date = article.findtext(".//PubDate/Year", "") or article.findtext(".//PubDate/MedlineDate", "")[:4]
+            papers.append({
+                "id":         "pubmed_" + pmid,
+                "title":      title,
+                "abstract":   abstr,
+                "authors":    json.dumps(authors),
+                "category":   "health",
+                "arxiv_url":  f"https://pubmed.ncbi.nlm.nih.gov/{pmid}/",
+                "published":  pub_date,
+                "source":     "pubmed",
+                "fetched_at": datetime.now(timezone.utc).isoformat(),
+            })
+        except Exception:
+            continue
+
+    log.info("  -> %d papers", len(papers))
+    time.sleep(1)
     return papers
 
 # ── FILTER ────────────────────────────────────────────────────────────────────
@@ -506,10 +591,9 @@ def generate_images(articles: list):
                     timeout=30,
                 )
                 r.raise_for_status()
-                data     = r.json()
-                img_url  = data["urls"]["regular"]
-
-                img = requests.get(img_url, timeout=60, stream=True)
+                data    = r.json()
+                img_url = data["urls"]["regular"]
+                img     = requests.get(img_url, timeout=60, stream=True)
                 img.raise_for_status()
                 with open(dest, "wb") as f:
                     for chunk in img.iter_content(chunk_size=8192):
@@ -556,27 +640,38 @@ def run_pipeline():
 
     init_db()
 
+    # ── arXiv: Ciencia y Tecnologia ──────────────────────────────────────────
     log.info("── Scout arXiv ──────────────────────")
     for cat in ARXIV_CATEGORIES:
         papers = scout_arxiv(cat)
         save_papers(papers, "arxiv")
         time.sleep(4)
 
+    # ── Semantic Scholar: Ciencia y Tecnologia ────────────────────────────────
     log.info("── Scout Semantic Scholar ───────────")
     for q in random.sample(SCIENCE_QUERIES, min(2, len(SCIENCE_QUERIES))):
-        papers = scout_semantic_scholar(q)
+        papers = scout_semantic_scholar(q, category="science.general")
         save_papers(papers, "semantic_scholar")
         time.sleep(2)
 
+    # ── PubMed: Salud ─────────────────────────────────────────────────────────
+    log.info("── Scout PubMed ─────────────────────")
+    for q in random.sample(HEALTH_QUERIES, min(2, len(HEALTH_QUERIES))):
+        papers = scout_pubmed(q)
+        save_papers(papers, "pubmed")
+        time.sleep(2)
+
+    # ── Europe PMC: Salud ─────────────────────────────────────────────────────
     log.info("── Scout Europe PMC ─────────────────")
-    for q in random.sample(SCIENCE_QUERIES, min(1, len(SCIENCE_QUERIES))):
-        papers = scout_europe_pmc(q)
+    for q in random.sample(HEALTH_QUERIES, min(1, len(HEALTH_QUERIES))):
+        papers = scout_europe_pmc(q, category="health")
         save_papers(papers, "europe_pmc")
         time.sleep(2)
 
+    # ── CORE: Ciencia general ─────────────────────────────────────────────────
     log.info("── Scout CORE ───────────────────────")
     for q in random.sample(SCIENCE_QUERIES, min(1, len(SCIENCE_QUERIES))):
-        papers = scout_core(q)
+        papers = scout_core(q, category="science.general")
         save_papers(papers, "core")
         time.sleep(2)
 

@@ -17,15 +17,18 @@ IMAGES_DIR    = Path(__file__).parent / "static" / "images"
 IMAGES_DIR.mkdir(parents=True, exist_ok=True)
 
 CAT_LABELS = {
-    "cs.AI":             "Inteligencia Artificial",
-    "cs.LG":             "Machine Learning",
-    "physics.app-ph":    "Física Aplicada",
-    "cond-mat.mtrl-sci": "Materiales",
-    "eess.SY":           "Energía",
-    "q-bio.NC":          "Neurociencia",
+    "cs.AI":             "Tecnología",
+    "cs.LG":             "Tecnología", 
+    "cs.RO":             "Tecnología",
+    "eess.SY":           "Tecnología",
+    "physics.app-ph":    "Ciencia",
+    "cond-mat.mtrl-sci": "Ciencia",
+    "q-bio.NC":          "Salud",
     "science.general":   "Ciencia",
-    "science.life":      "Biología",
-    "science.astronomy": "Astronomía",
+    "science.life":      "Salud",
+    "science.astronomy": "Ciencia",
+    "health":            "Salud",
+    "technology":        "Tecnología",
 }
 
 app = FastAPI()
