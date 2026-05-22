@@ -14,7 +14,7 @@ from pathlib import Path
 DB_PATH      = Path(__file__).parent / "data.db"
 
 # ── KEYS ──────────────────────────────────────────────────────────────────────
-GEMINI_API_KEY   = "AIzaSyDW_S30JXWC6N5Uh2eHktAvkEZcmany9u8"
+GEMINI_API_KEY   = "AIzaSyCsLV46VWeBFY-Xtz4hPRfuHTf3Ie6QWYY"
 UNSPLASH_API_KEY = "GRTNt5NFc4rbIRSJNiLPQvlEkqYplx0xNQDMNpizxjs"
 
 GEMINI_URL   = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent"
@@ -83,22 +83,27 @@ log = logging.getLogger("cienciahoy")
 # ── GEMINI ────────────────────────────────────────────────────────────────────
 
 def check_gemini() -> bool:
-    try:
-        r = requests.post(
-            GEMINI_URL,
-            params={"key": GEMINI_API_KEY},
-            json={"contents": [{"parts": [{"text": "di ok"}]}]},
-            timeout=10,
-        )
-        r.raise_for_status()
-        log.info("Gemini OK")
-        return True
-    except Exception as e:
-        log.error("Gemini no responde: %s", e)
-        return False
+    for attempt in range(3):
+        try:
+            r = requests.post(
+                GEMINI_URL,
+                params={"key": GEMINI_API_KEY},
+                json={"contents": [{"parts": [{"text": "di ok"}]}]},
+                timeout=10,
+            )
+            r.raise_for_status()
+            log.info("Gemini OK")
+            return True
+        except Exception as e:
+            log.warning("Gemini check intento %d/3: %s", attempt + 1, e)
+            time.sleep(30)
+    log.error("Gemini no disponible tras 3 intentos")
+    return False
 
-def ask_gemini(prompt: str, timeout: int = 60) -> str:
-    for attempt in range(2):
+
+def ask_gemini(prompt: str, timeout: int = 30) -> str | None:
+    wait_times = [60, 120, 240]   # espera exponencial ante 429
+    for attempt in range(3):
         try:
             r = requests.post(
                 GEMINI_URL,
@@ -106,15 +111,21 @@ def ask_gemini(prompt: str, timeout: int = 60) -> str:
                 json={"contents": [{"parts": [{"text": prompt}]}]},
                 timeout=timeout,
             )
+            if r.status_code == 429:
+                wait = wait_times[attempt]
+                log.warning("ask_gemini 429 — esperando %ds (intento %d/3)", wait, attempt + 1)
+                time.sleep(wait)
+                continue
             r.raise_for_status()
-            text = r.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
-            if text:
-                time.sleep(4)
-                return text
+            data = r.json()
+            time.sleep(5)   # pausa cortesia entre llamadas exitosas
+            return data["candidates"][0]["content"]["parts"][0]["text"]
         except Exception as e:
-            log.warning("Gemini error (intento %d/2): %s", attempt + 1, e)
-            time.sleep(10)
-    return ""
+            log.warning("ask_gemini intento %d/3: %s", attempt + 1, e)
+            time.sleep(wait_times[attempt])
+    log.error("ask_gemini fallo tras 3 intentos")
+    return None
+
 
 def clean_json(text: str) -> str:
     import re
@@ -363,7 +374,6 @@ def scout_core(query: str, category: str = "science.general") -> list:
 def scout_pubmed(query: str) -> list:
     log.info("Scout PubMed: %s", query[:50])
     try:
-        # Buscar IDs
         search = requests.get(
             "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
             params={
@@ -381,7 +391,6 @@ def scout_pubmed(query: str) -> list:
             log.info("  -> 0 papers")
             return []
 
-        # Obtener detalles
         fetch = requests.get(
             "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
             params={
