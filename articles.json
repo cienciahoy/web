@@ -1,20 +1,223 @@
 [
   {
-    "id": "b1f52d1aa1ff",
-    "paper_id": "arxiv_2605.21481v1",
-    "headline": "Inteligencia Artificial revoluciona la publicación científica con AiraXiv",
-    "summary": "Una nueva plataforma abierta usa IA para agilizar la investigación y revisión, uniendo a científicos humanos y máquinas.",
-    "body": "El imparable avance de la inteligencia artificial (IA) ha desatado una explosión de nuevos estudios, tanto de científicos humanos como de las propias máquinas. Este volumen masivo está saturando los sistemas de publicación académica tradicionales. Revistas y conferencias luchan con un aluvión de envíos y una carga de trabajo abrumadora para los revisores, ralentizando la difusión de descubrimientos y el progreso científico global.\n\nPara mitigar estos desafíos, investigadores proponen AiraXiv, una innovadora plataforma de acceso abierto impulsada por IA. Su objetivo: establecer un nuevo paradigma editorial donde científicos humanos e inteligencias artificiales colaboren activamente como autores y lectores. La visión es que los trabajos de investigación dejen de ser documentos estáticos, evolucionando continuamente mediante un ciclo de retroalimentación constante y dinámico.\n\nAiraXiv se sustenta en tres pilares clave: “preprints” abiertos para publicación inmediata; análisis y revisión “aumentados por IA”, donde algoritmos asisten en la evaluación y mejora de contenidos; e integración de retroalimentación continua de los lectores. La plataforma cuenta con una interfaz intuitiva para humanos y un “Protocolo de Contexto del Modelo” que permite a las IA interactuar directamente, consolidando una verdadera simbiosis.\n\nEsta iniciativa promete transformar la forma en que la ciencia se genera y comparte. AiraXiv podría desatascar los cuellos de botella de la publicación, permitiendo una difusión más rápida de descubrimientos y un progreso científico acelerado. Al integrar a las IA como participantes activos, abre nuevas vías para la co-creación de conocimiento. La creatividad humana y la capacidad analítica de las máquinas se fusionarían para explorar hipótesis y solucionar problemas a una escala y velocidad sin precedentes.\n\nAunque el potencial de AiraXiv es inmenso, enfrenta retos significativos. Será fundamental garantizar la calidad, fiabilidad y originalidad de las investigaciones con alta intervención de IA. La adopción masiva por parte de la comunidad científica requerirá confianza en este nuevo modelo. Además, surgen importantes consideraciones éticas sobre la autoría de la IA, la gestión de sesgos algorítmicos y la propiedad intelectual en un ecosistema donde humanos y máquinas son coautores y co-revisores.\n\nAiraXiv es más que una herramienta; es una visión de la próxima frontera de la investigación. Si supera sus desafíos, podría transformar la ciencia en un proceso orgánico y dinámico, con conocimiento que se actualiza y mejora constantemente. Nos acercaría a una era de descubrimientos exponenciales, donde la inteligencia humana y artificial se unen sinérgicamente para desentrañar misterios, formulando hipótesis y analizando datos de maneras inimaginables, llevando la exploración intelectual a límites completamente nuevos.",
-    "category": "cs.AI",
+    "id": "c1d7e6a2d430",
+    "paper_id": "pubmed_42177638",
+    "headline": "Perros con hiper cortisolismo resistente al tratamiento",
+    "summary": "Investigadores identifican factores que predicen una mala respuesta al tratamiento con trilostana en perros con hiper cortisolismo dependiente de la pituitaria, una condición común en caninos. Los hallazgos pueden ayudar a mejorar el tratamiento de esta enfermedad.",
+    "body": "La hiper cortisolismo dependiente de la pituitaria es una condición común en perros que se caracteriza por un exceso de cortisol en la sangre. El tratamiento con trilostana es el más comúnmente utilizado para esta condición, pero algunos perros no responden bien a este medicamento. Un estudio reciente publicado en la revista Journal of Veterinary Internal Medicine ha investigado los factores que predicen una mala respuesta al tratamiento con trilostana en perros con hiper cortisolismo dependiente de la pituitaria. Los investigadores analizaron los datos de 23 perros con esta condición que fueron tratados con trilostana y encontraron que los perros que respondieron bien al tratamiento tenían niveles más bajos de alanina aminotransferasa (ALT) y eACTH en sangre en el momento del diagnóstico. Estos hallazgos sugieren que los niveles de ALT y eACTH pueden ser utilizados como marcadores para predecir la respuesta al tratamiento con trilostana en perros con hiper cortisolismo dependiente de la pituitaria. La identificación de estos factores puede ayudar a los veterinarios a tomar decisiones informadas sobre el tratamiento de esta condición y a mejorar la calidad de vida de los perros afectados. Sin embargo, es importante destacar que esta es una condición compleja y que más investigación es necesaria para entender completamente los mecanismos subyacentes y para desarrollar tratamientos más efectivos. En el futuro, es posible que se desarrollen nuevos tratamientos que se adapten a las necesidades individuales de cada perro, lo que podría mejorar significativamente la calidad de vida de los perros con hiper cortisolismo dependiente de la pituitaria.",
+    "category": "health",
     "tags": [
-      "Inteligencia artificial",
-      "Publicación científica",
-      "Acceso abierto",
-      "Innovación",
-      "Futuro de la ciencia"
+      "medicina veterinaria",
+      "trilostane",
+      "hiper cortisolismo"
     ],
     "image_prompt": null,
-    "published_at": "2026-05-21T10:38:15.263126+00:00",
-    "status": "published"
+    "published_at": "2026-05-25T10:02:28.384127+00:00",
+    "status": "published",
+    "source_url": "https://doi.org/10.1093/jvimsj/aalag096",
+    "image_query": "perros con condicion medica"
+  },
+  {
+    "id": "ac54b77ef313",
+    "paper_id": "pubmed_42177646",
+    "headline": "Descubierta nueva esperanza para tratar lesiones pulmonares",
+    "summary": "Investigadores han encontrado una nueva clase de compuestos que inhiben la enzima PI3Kδ, relacionada con lesiones pulmonares agudas, lo que podría llevar a nuevos tratamientos efectivos para esta condición",
+    "body": "La lesión pulmonar aguda es una condición grave que puede ser causada por una variedad de factores, incluyendo infecciones, lesiones y enfermedades respiratorias. A pesar de su gravedad, no hay tratamientos efectivos disponibles para esta condición. Sin embargo, un equipo de investigadores ha encontrado una nueva esperanza en la forma de una clase de compuestos llamados derivados de 4-metilquinazolina. Estos compuestos han demostrado ser inhibidores potentes y selectivos de la enzima fosfoinositol 3-quinasa δ (PI3Kδ), que se ha identificado como un objetivo terapéutico prometedor para el tratamiento de enfermedades respiratorias inflamatorias. La investigación, publicada en la revista Journal of Medicinal Chemistry, describe el diseño y la síntesis de una serie de derivados de 4-metilquinazolina que han demostrado ser inhibidores de PI3Kδ. Los investigadores utilizaron un enfoque de diseño de fármacos basado en la estructura para optimizar la actividad de estos compuestos y mejorar su selectividad para la enzima PI3Kδ. Los resultados de la investigación sugieren que estos compuestos podrían ser útiles para el tratamiento de lesiones pulmonares agudas y otras enfermedades respiratorias inflamatorias. Aunque se necesitan más estudios para confirmar la eficacia y la seguridad de estos compuestos, la investigación ofrece una nueva perspectiva en el tratamiento de estas condiciones. Los investigadores esperan que sus hallazgos puedan conducir al desarrollo de nuevos tratamientos efectivos para lesiones pulmonares agudas y otras enfermedades respiratorias inflamatorias.",
+    "category": "health",
+    "tags": [
+      "farmacologia",
+      "enfermedades respiratorias",
+      "investigacion cientifica"
+    ],
+    "image_prompt": null,
+    "published_at": "2026-05-25T10:02:24.469137+00:00",
+    "status": "published",
+    "source_url": "https://doi.org/10.1021/acs.jmedchem.6c00288",
+    "image_query": "pulmones inflamados"
+  },
+  {
+    "id": "42acfdd00553",
+    "paper_id": "pubmed_42178418",
+    "headline": "Descubren causa genética de trastorno del equilibrio",
+    "summary": "Investigadores encuentran expansión de repeticiones GAA en el gen FGF14 como causa de enfermedad vestibulopatía bilateral, un trastorno que afecta el equilibrio y la coordinación, en un 2,2% de los casos estudiados, lo que abre nuevas posibilidades para el diagnóstico y tratamiento de esta afección",
+    "body": "Un equipo de investigadores ha descubierto que la expansión de repeticiones GAA en el gen FGF14 es una causa común de la enfermedad vestibulopatía bilateral (BVP), un trastorno que afecta el equilibrio y la coordinación. La BVP es una condición caracterizada por la pérdida de función vestibular en ambos oídos, lo que puede causar problemas de equilibrio, mareos y dificultades para caminar. En este estudio, los investigadores analizaron a 116 pacientes con BVP y encontraron que el 2,2% de los casos estaban relacionados con la expansión de repeticiones GAA en el gen FGF14. Esta expansión genética es la causa de la enfermedad espinocerebelosa tipo 27B (SCA27B), también conocida como enfermedad GAA-FGF14. Los resultados del estudio sugieren que la enfermedad GAA-FGF14 puede ser una causa más común de BVP de lo que se pensaba anteriormente. Los investigadores también encontraron que la expansión de repeticiones GAA en el gen FGF14 puede ocurrir en combinación con otras mutaciones genéticas, como la expansión de repeticiones en el gen RFC1, lo que puede aumentar la gravedad de la enfermedad. El descubrimiento de la expansión de repeticiones GAA en el gen FGF14 como causa de BVP tiene importantes implicaciones para el diagnóstico y tratamiento de esta condición. Los pacientes con BVP pueden beneficiarse de pruebas genéticas para detectar la expansión de repeticiones GAA en el gen FGF14, lo que puede ayudar a identificar la causa subyacente de su enfermedad y a desarrollar tratamientos más efectivos. Además, el estudio sugiere que la enfermedad GAA-FGF14 puede ser una causa más común de BVP de lo que se pensaba anteriormente, lo que puede llevar a un aumento en la conciencia y la investigación sobre esta condición. En resumen, el descubrimiento de la expansión de repeticiones GAA en el gen FGF14 como causa de BVP es un avance importante en la comprensión de esta condición y puede tener un impacto significativo en el diagnóstico y tratamiento de los pacientes con esta enfermedad. Los investigadores esperan que estos hallazgos puedan llevar a un mejor entendimiento de la enfermedad y a la desarrollo de nuevas terapias para tratar la BVP y la enfermedad GAA-FGF14.",
+    "category": "health",
+    "tags": [
+      "genética",
+      "neurología",
+      "vestibulopatía",
+      "FGF14",
+      "RFC1"
+    ],
+    "image_prompt": null,
+    "published_at": "2026-05-25T10:02:20.711615+00:00",
+    "status": "published",
+    "source_url": "https://doi.org/10.1007/s00415-026-13867-1",
+    "image_query": "vestibular system illustration"
+  },
+  {
+    "id": "8567557ada1b",
+    "paper_id": "arxiv_2605.23899v1",
+    "headline": "Nuevos avances en inteligencia artificial",
+    "summary": "Investigadores descubren cómo extraer habilidades de experiencias pasadas para mejorar la inteligencia artificial, lo que podría revolucionar la forma en que los agentes aprenden y se adaptan a nuevos entornos, con implicaciones significativas en áreas como la automatización y la toma de decisiones",
+    "body": "La inteligencia artificial ha avanzado significativamente en los últimos años, y uno de los factores clave detrás de este progreso es la capacidad de los agentes para aprender de sus experiencias pasadas. Un equipo de investigadores ha descubierto cómo extraer habilidades de estas experiencias, lo que podría permitir a los agentes aprender y adaptarse más rápidamente a nuevos entornos. Esto se logra a través de la creación de habilidades estructuradas, que son procedimientos recurrentes que se pueden aplicar en diferentes situaciones. Estas habilidades se pueden generar a nivel de dominio, lo que significa que se pueden adaptar a diferentes áreas de aplicación, y se pueden generar mediante modelos, lo que reduce la necesidad de intervención humana. Sin embargo, a pesar de los avances en la extracción de habilidades, la comprensión de cómo funcionan y qué los hace exitosos o fallidos es limitada. Para abordar esta brecha, los investigadores han desarrollado un marco de evaluación que permite analizar el ciclo de vida completo de las habilidades, desde la generación de experiencias hasta la extracción y el consumo de habilidades. Esto ha permitido a los investigadores identificar qué hace que las habilidades sean exitosas o fallidas, y cómo se pueden mejorar. Las implicaciones de este descubrimiento son significativas, ya que podrían permitir a los agentes aprender y adaptarse más rápidamente a nuevos entornos, lo que podría revolucionar áreas como la automatización y la toma de decisiones. Sin embargo, también hay limitaciones y desafíos que deben ser abordados, como la necesidad de más investigación para entender cómo se pueden aplicar estas habilidades en diferentes contextos. En el futuro, es probable que veamos un mayor uso de estas habilidades en áreas como la robótica, la atención médica y la finanza, lo que podría llevar a avances significativos en la forma en que los agentes interactúan con su entorno y toman decisiones.",
+    "category": "cs.AI",
+    "tags": [
+      "inteligencia artificial",
+      "agentes de lenguaje",
+      "aprendizaje automático"
+    ],
+    "image_prompt": null,
+    "published_at": "2026-05-25T10:02:16.198045+00:00",
+    "status": "published",
+    "source_url": "https://arxiv.org/abs/2605.23899v1",
+    "image_query": "Inteligencia artificial y redes neuronales"
+  },
+  {
+    "id": "29c0fbe07be6",
+    "paper_id": "pubmed_42178008",
+    "headline": "Descubren gen que reduce proliferación de células placentarias",
+    "summary": "Investigadores encuentran que la sobreexpresión de CCN5 suprime la proliferación y migración de células trofoblásticas, lo que podría ser clave para entender la preeclampsia, una condición obstétrica grave que afecta a miles de mujeres cada año.",
+    "body": "La preeclampsia es una condición obstétrica que afecta a un gran número de mujeres embarazadas en todo el mundo. Se caracteriza por una proliferación y migración anormal de las células trofoblásticas de la placenta, lo que puede llevar a complicaciones graves para la madre y el feto. Un equipo de investigadores ha descubierto que la sobreexpresión del gen CCN5 puede suprimir la proliferación, migración, invasión y transición epitelial-mesenquimal de las células trofoblásticas HTR-8/SVneo. Esto sugiere que CCN5 podría jugar un papel importante en la regulación de las funciones de las células trofoblásticas y, en última instancia, en la prevención de la preeclampsia. Los investigadores utilizaron técnicas de transfección de células para sobreexpresar o silenciar el gen CCN5 en células trofoblásticas cultivadas en laboratorio. Los resultados mostraron que la sobreexpresión de CCN5 redujo significativamente la proliferación y migración de las células, mientras que la supresión del gen tuvo el efecto contrario. Estos hallazgos tienen importantes implicaciones para la comprensión de la preeclampsia y podrían conducir al desarrollo de nuevas terapias para tratar esta condición. Sin embargo, es importante destacar que se necesitan más estudios para confirmar estos resultados y explorar las posibles aplicaciones clínicas de la sobreexpresión de CCN5. En el futuro, los investigadores podrían explorar la posibilidad de utilizar la terapia génica para sobreexpresar CCN5 en mujeres embarazadas con preeclampsia, lo que podría ayudar a prevenir o tratar esta condición.",
+    "category": "health",
+    "tags": [
+      "preeclampsia",
+      "CCN5",
+      "trophoblast",
+      "biología molecular"
+    ],
+    "image_prompt": null,
+    "published_at": "2026-05-25T10:02:12.141790+00:00",
+    "status": "published",
+    "source_url": "https://doi.org/10.1016/j.ejphar.2026.178963",
+    "image_query": "células placentarias microscopio"
+  },
+  {
+    "id": "0065e9d6fea9",
+    "paper_id": "pubmed_42178065",
+    "headline": "Descubren genes clave en peras",
+    "summary": "Investigadores identifican 85 genes en peras que regulan el transporte de nutrientes y hormonas, lo que podría mejorar la resistencia a enfermedades como la quemadura del fuego. El hallazgo es relevante para la agricultura y la producción de frutas.",
+    "body": "Un equipo de científicos ha realizado un estudio exhaustivo sobre la familia de genes Nitrate Transporter 1/Peptide Transporter (NPF) en peras (Pyrus bretschneideri). Estos genes desempeñan un papel fundamental en el transporte de una amplia variedad de nutrientes y hormonas en las plantas, incluyendo nitratos, péptidos, aminoácidos y ácidos como el ácido indol-3-acético (IAA) y el ácido abscísico (ABA). Aunque se han realizado estudios similares en plantas modelo como Arabidopsis y arroz, así como en cultivos hortícolas como tomates y manzanas, la caracterización sistemática de los genes NPF en peras no había sido investigada a fondo. En este estudio, los investigadores identificaron 85 genes PbNPF en el genoma de la pera a través de análisis filogenéticos y genómicos. El análisis de la ubicación cromosómica reveló que 82 genes se distribuyen en 17 cromosomas, mientras que tres genes tienen una localización ambigua. La caracterización funcional de uno de estos genes, PbNPF5.7, mostró que juega un papel importante en la resistencia a la quemadura del fuego, una enfermedad que puede causar grandes pérdidas en la producción de peras. El estudio tiene implicaciones importantes para la agricultura y la producción de frutas, ya que la comprensión de los genes NPF en peras podría ayudar a desarrollar variedades más resistentes a enfermedades. Sin embargo, es importante destacar que el estudio también tiene limitaciones, como la necesidad de más investigación para entender completamente la función de los genes NPF en peras. En el futuro, se espera que este estudio sirva como base para investigaciones más avanzadas sobre la biología de las peras y el desarrollo de estrategias para mejorar la producción y la resistencia a enfermedades en este cultivo.",
+    "category": "health",
+    "tags": [
+      "genómica",
+      "biología vegetal",
+      "resistencia a enfermedades"
+    ],
+    "image_prompt": null,
+    "published_at": "2026-05-25T10:02:08.408864+00:00",
+    "status": "published",
+    "source_url": "https://doi.org/10.1016/j.plantsci.2026.113230",
+    "image_query": "pera genetica"
+  },
+  {
+    "id": "e0055249f1ba",
+    "paper_id": "core_316479739",
+    "headline": "Descubren clave para entender la regulación del yo",
+    "summary": "Investigadores descubren la importancia de la integración en la regulación del yo, según la Teoría de la Autodeterminación. Esto puede ayudar a entender cómo desarrollamos y ejercemos nuestras capacidades para regularnos a nosotros mismos.",
+    "body": "La regulación del yo es un proceso complejo que implica la capacidad de desarrollar y ejercer nuestras capacidades para autoregularnos. Un equipo de investigadores ha estado estudiando este tema en el marco de la Teoría de la Autodeterminación (SDT), que se centra en la importancia de la autonomía y la motivación intrínseca en la conducta humana. Según estos investigadores, la integración es un aspecto clave de la regulación del yo, ya que implica la capacidad de coordinar y armonizar diferentes aspectos de nuestra personalidad y comportamiento. La investigación sugiere que la integración es un proceso multifacético que implica la activación de diferentes redes neuronales en el cerebro. Estas redes neuronales están compuestas por diferentes regiones cerebrales que operan de manera descentralizada y se comunican entre sí para apoyar los aspectos experimentales y conductuales de la integración. Los investigadores también han identificado algunos de los métodos neurocientíficos disponibles para estudiar la integración, lo que puede ayudar a profundizar en la comprensión de este proceso. La comprensión de la integración y su relación con la regulación del yo puede tener implicaciones importantes para la psicología y la neurociencia, ya que puede ayudar a desarrollar intervenciones y terapias más efectivas para mejorar la regulación del yo y la salud mental en general. Sin embargo, es importante destacar que la investigación en este campo todavía está en sus inicios y se necesitan más estudios para profundizar en la comprensión de la integración y su papel en la regulación del yo. En el futuro, es probable que veamos avances en la comprensión de la integración y su relación con la regulación del yo, lo que puede tener un impacto significativo en la forma en que abordamos la salud mental y el bienestar.",
+    "category": "science.general",
+    "tags": [
+      "neurobiologia",
+      "procesos integrativos",
+      "teoria de la auto-determinacion"
+    ],
+    "image_prompt": null,
+    "published_at": "2026-05-25T10:02:04.127025+00:00",
+    "status": "published",
+    "source_url": "https://doi.org/10.1093/oxfordhb/9780197600047.013.14",
+    "image_query": "redes neuronales cerebro"
+  },
+  {
+    "id": "78959d5e144c",
+    "paper_id": "arxiv_2605.23898v1",
+    "headline": "Modelos de visión y lenguaje mejoran comprensión espacial",
+    "summary": "Investigadores desarrollan SpaceNum, un marco para evaluar la comprensión numérica espacial en modelos de visión y lenguaje, demostrando limitaciones en la percepción espacial de estos sistemas, lo que puede mejorar su desempeño en entornos físicos",
+    "body": "Los modelos de visión y lenguaje (VLMs) están cada vez más presentes en entornos físicos, donde necesitan producir salidas numéricas como magnitudes de acción y coordenadas espaciales. Aunque estos números parecen significativos, no está claro si estas salidas numéricas están realmente basadas en la percepción espacial. Por lo tanto, en este trabajo, los investigadores revisitan la comprensión numérica espacial a través de SpaceNum, un marco unificado que captura dos configuraciones complementarias: números como transiciones dinámicas durante la exploración espacial y números como diseños estáticos en el razonamiento espacial. Los investigadores formularon dos tareas bidireccionales, Num2Space y Space2Num, para evaluar cómo bien los VLMs mapean entre la estructura espacial del lado de la visión y las representaciones numéricas del lado del lenguaje. Los resultados muestran que los VLMs actuales tienen limitaciones en la comprensión numérica espacial, lo que puede tener un impacto significativo en su desempeño en entornos físicos. La investigación sugiere que es necesario mejorar la comprensión numérica espacial de los VLMs para que puedan funcionar de manera efectiva en entornos físicos. En el futuro, se espera que esta investigación impulse el desarrollo de VLMs más avanzados y precisos, capaces de interactuar de manera más eficaz con el entorno físico. La comprensión numérica espacial es fundamental para una variedad de aplicaciones, como la robótica, la realidad virtual y la inteligencia artificial. Por lo tanto, es fundamental seguir investigando y mejorando la comprensión numérica espacial de los VLMs para que puedan alcanzar su máximo potencial.",
+    "category": "cs.AI",
+    "tags": [
+      "Inteligencia Artificial",
+      "Visión por Computadora",
+      "Modelos de Lenguaje"
+    ],
+    "image_prompt": null,
+    "published_at": "2026-05-25T10:02:00.146317+00:00",
+    "status": "published",
+    "source_url": "https://arxiv.org/abs/2605.23898v1",
+    "image_query": "espacio numerico"
+  },
+  {
+    "id": "d5e39385846c",
+    "paper_id": "pubmed_42178167",
+    "headline": "Genes que controlan el ritmo circadiano vinculados a nefropatía diabética",
+    "summary": "Un estudio revela la conexión entre genes que regulan el ritmo circadiano y la nefropatía diabética, abriendo camino a nuevos tratamientos personalizados. Los investigadores analizaron datos genéticos y omics para identificar genes patógenos que podrían ser blanco de terapias precisas.",
+    "body": "La nefropatía diabética es una complicación grave de la diabetes que puede llevar a la insuficiencia renal. Un equipo de investigadores ha descubierto una posible conexión entre genes que controlan el ritmo circadiano y esta enfermedad. El estudio, publicado en una revista científica, utilizó un enfoque de análisis de datos multi-ómicos para identificar genes patógenos que podrían ser responsables de la nefropatía diabética. Los investigadores analizaron datos de estudios de asociación genética a nivel de todo el genoma y utilizaron técnicas de análisis de datos para validar sus hallazgos. Los resultados sugieren que ciertos genes que regulan el ritmo circadiano podrían estar involucrados en la patogénesis de la nefropatía diabética. Esto podría abrir camino a nuevos tratamientos personalizados que se centren en estos genes. La investigación también destacó la importancia de considerar la variabilidad genética en la respuesta a los tratamientos. Aunque el estudio tiene limitaciones, como la necesidad de más investigación para confirmar los hallazgos, los resultados son prometedores y podrían llevar a un mejor entendimiento de la nefropatía diabética y a la desarrollo de terapias más efectivas. En el futuro, es posible que los médicos puedan utilizar esta información para desarrollar tratamientos personalizados para pacientes con nefropatía diabética, lo que podría mejorar su calidad de vida y reducir el riesgo de complicaciones graves.",
+    "category": "health",
+    "tags": [
+      "genética",
+      "medicina personalizada",
+      "nefropatía diabética"
+    ],
+    "image_prompt": null,
+    "published_at": "2026-05-25T10:01:56.352373+00:00",
+    "status": "published",
+    "source_url": "https://doi.org/10.1080/0886022X.2026.2663248",
+    "image_query": "ritmo circadiano y células renales"
+  },
+  {
+    "id": "91d63a03ecbf",
+    "paper_id": "pubmed_42178200",
+    "headline": "Genetica y riesgo en aterosclerosis",
+    "summary": "Investigadores descubren que la genetica y factores modificables influyen en la aterosclerosis, una enfermedad cardiovascular común. Se encontraron cientos de variantes geneticas que contribuyen a su desarrollo, lo que explica su alta prevalencia en la poblacion.",
+    "body": "La aterosclerosis es una enfermedad cardiovascular que afecta a millones de personas en todo el mundo. Aunque la genetica desempeña un papel importante en su desarrollo, no explica completamente su alta prevalencia. Recientes estudios han demostrado que la interaccion entre la genetica y factores modificables, como la dieta y el estilo de vida, es crucial para entender la enfermedad. La hipotesis de la enfermedad comun-variante comun propone que las enfermedades comunes, como la aterosclerosis, son causadas por multiples variantes geneticas comunes. Los estudios de asociacion genomica han verificado esta hipotesis, mostrando que cientos de alelos de riesgo contribuyen al desarrollo de la aterosclerosis. Muchos de estos alelos de riesgo se encuentran con alta frecuencia en la poblacion, lo que significa que todos llevamos estos alelos en grandes cantidades y que, en conjunto, proporcionan el patron para que la aterosclerosis se desarrolle con tanta frecuencia. Aunque los efectos de cada alelo de riesgo son pequeños, su impacto acumulado puede ser significativo. Los investigadores creen que entender la interaccion entre la genetica y los factores modificables es fundamental para desarrollar estrategias efectivas para prevenir y tratar la aterosclerosis. En el futuro, es probable que veamos un enfoque mas personalizado en la medicina, donde se tengan en cuenta las variantes geneticas individuales y los factores de estilo de vida para prevenir y tratar la enfermedad. Esto puede incluir recomendaciones personalizadas sobre dieta, ejercicio y otros factores de estilo de vida, asi como tratamientos medicamentosos y otros enfoques terapeuticos. En resumen, la comprension de la interaccion entre la genetica y los factores modificables es crucial para abordar la aterosclerosis y mejorar la salud cardiovascular en general.",
+    "category": "health",
+    "tags": [
+      "genética",
+      "aterosclerosis",
+      "factores de riesgo",
+      "investigación científica",
+      "salud pública"
+    ],
+    "image_prompt": null,
+    "published_at": "2026-05-25T10:01:52.598742+00:00",
+    "status": "published",
+    "source_url": "https://doi.org/10.1016/j.atherosclerosis.2026.120727",
+    "image_query": "arterias coronarias"
+  },
+  {
+    "id": "61fa37b11396",
+    "paper_id": "arxiv_2605.23901v1",
+    "headline": "Nuevas leyes de escalado para modelos de lenguaje",
+    "summary": "Investigadores proponen una nueva perspectiva teórica para entender el rendimiento de los modelos de lenguaje grandes, inspirada en la teoría de la información de Shannon, lo que podría explicar fenómenos no monotónicos en la capacitación de estos modelos.",
+    "body": "Los modelos de lenguaje grandes (LLMs) han revolucionado el campo de la inteligencia artificial en los últimos años, pero su capacitación y escalado siguen siendo un desafío. Las leyes de escalado existentes, que relacionan el tamaño del modelo con su rendimiento, no logran explicar fenómenos como la sobrecapacitación catastrófica y la degradación inducida por la cuantización, donde el rendimiento se deteriora a pesar del aumento de la capacidad de cálculo. Un equipo de investigadores ha propuesto una nueva perspectiva teórica, conocida como la Ley de Escalado de Shannon, que modela la capacitación de LLMs como la transmisión de información a través de un canal ruidoso, basada en el teorema de Shannon-Hartley. Al mapear los parámetros del modelo con la banda de frecuencia del canal y los tokens de capacitación con la potencia del señal, esta formulación explícitamente captura la interacción entre el señal de aprendizaje y el ruido intrínseco. Esta perspectiva revela una capacidad fundamental de Shannon para LLMs: escalar el tamaño del modelo o los datos sin preservar una relación señal ruido (SNR) suficiente inevitablemente conduce a una disminución en el rendimiento. Esto podría explicar los fenómenos no monotónicos observados en la capacitación de LLMs. La Ley de Escalado de Shannon ofrece una comprensión más profunda de los límites y posibilidades de los modelos de lenguaje grandes y podría guiar el desarrollo de nuevas estrategias de capacitación y escalado. Sin embargo, es importante destacar que esta investigación es teórica y requiere una validación experimental para confirmar sus hallazgos. En el futuro, se espera que esta perspectiva teórica inspire nuevas investigaciones y desarrollos en el campo de la inteligencia artificial, lo que podría conducir a modelos de lenguaje más eficientes y efectivos.",
+    "category": "cs.AI",
+    "tags": [
+      "inteligencia artificial",
+      "modelos de lenguaje",
+      "teoría de la información"
+    ],
+    "image_prompt": null,
+    "published_at": "2026-05-25T10:01:48.558135+00:00",
+    "status": "published",
+    "source_url": "https://arxiv.org/abs/2605.23901v1",
+    "image_query": "canal de comunicacion ruidosa"
+  },
+  {
+    "id": "19fa27a95273",
+    "paper_id": "arxiv_2605.23904v1",
+    "headline": "Nueva estrategia para mejorar habilidades de agentes",
+    "summary": "Investigadores desarrollan SkillOpt, un sistema que permite a los agentes mejorar sus habilidades de manera autónoma y controlada, a través de un proceso de optimización basado en texto, lo que abre nuevas posibilidades para la inteligencia artificial y el aprendizaje automático.",
+    "body": "En la actualidad, las habilidades de los agentes se crean de manera manual, se generan de una sola vez o se evolucionan a través de un proceso de revisión autónoma poco controlado. Sin embargo, estos métodos no son lo suficientemente efectivos, ya que no permiten que las habilidades se mejoren de manera consistente y controlada. Para abordar este problema, un equipo de investigadores ha desarrollado SkillOpt, un sistema que permite a los agentes mejorar sus habilidades de manera autónoma y controlada. SkillOpt se basa en la idea de entrenar las habilidades como un estado externo de un agente congelado, utilizando la misma disciplina que se utiliza para la optimización de pesos en el espacio de aprendizaje. De esta manera, se puede controlar y mejorar la habilidad de manera sistemática y reproducible. El sistema utiliza un modelo de optimizador separado que convierte las puntuaciones de las simulaciones en ediciones limitadas de agregar, eliminar o reemplazar en un solo documento de habilidad. Una edición solo se acepta si mejora estrictamente la puntuación de validación. Además, el sistema cuenta con un presupuesto de tasa de aprendizaje textual, un búfer de ediciones rechazadas y una actualización lenta y metálica por épocas. Los investigadores han demostrado que SkillOpt es capaz de mejorar las habilidades de los agentes de manera consistente y controlada, lo que abre nuevas posibilidades para la inteligencia artificial y el aprendizaje automático. Sin embargo, también se han identificado algunas limitaciones, como la necesidad de una gran cantidad de datos de entrenamiento y la posibilidad de que el sistema se quede atrapado en un óptimo local. A pesar de estas limitaciones, SkillOpt es un paso importante hacia el desarrollo de agentes más avanzados y autónomos, y su impacto potencial en la investigación y la industria es significativo. En el futuro, se espera que SkillOpt sea utilizado en una variedad de aplicaciones, desde la robótica hasta la atención médica, y que continue mejorando y evolucionando para abordar los desafíos más complejos de la inteligencia artificial.",
+    "category": "cs.AI",
+    "tags": [
+      "inteligencia artificial",
+      "aprendizaje automático",
+      "optimización de habilidades"
+    ],
+    "image_prompt": null,
+    "published_at": "2026-05-25T10:01:44.518324+00:00",
+    "status": "published",
+    "source_url": "https://arxiv.org/abs/2605.23904v1",
+    "image_query": "Inteligencia artificial textual"
   }
 ]
