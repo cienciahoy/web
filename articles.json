@@ -1,5 +1,224 @@
 [
   {
+    "id": "c54c55005f3a",
+    "paper_id": "arxiv_2605.25617v1",
+    "headline": "Sistema de transporte justo y eficiente",
+    "summary": "Investigadores desarrollan un modelo de planificación de transporte que prioriza la justicia y la equidad, considerando las limitaciones de presupuesto y seguridad de los usuarios, y las restricciones de infraestructura, para crear un sistema de transporte más justo y eficiente.",
+    "body": "La planificación de transporte ha sido un tema de interés durante años, pero la mayoría de los estudios se han centrado en optimizar los ingresos o los tiempos de viaje promedio, lo que a menudo perjudica a los usuarios más desfavorecidos. Sin embargo, un equipo de investigadores ha desarrollado un modelo de planificación de transporte que prioriza la justicia y la equidad, considerando las limitaciones de presupuesto y seguridad de los usuarios, y las restricciones de infraestructura. El modelo se centra en un sistema de movilidad intermodal autónomo, donde los taxi-robots autónomos proporcionan movilidad a demanda de manera conjunta. Esto permite a los investigadores analizar cómo se pueden optimizar los sistemas de transporte para que sean más justos y eficientes. El modelo también considera las limitaciones de infraestructura, como la capacidad de las carreteras y los sistemas de transporte público, para crear un sistema de transporte más sostenible y equitativo. Aunque el modelo aún tiene limitaciones, como la falta de datos sobre el comportamiento de los usuarios, los investigadores esperan que su trabajo pueda ayudar a crear sistemas de transporte más justos y eficientes en el futuro. La importancia de este estudio radica en que puede ayudar a reducir las desigualdades en el acceso al transporte, especialmente en áreas urbanas, y a crear sistemas de transporte más sostenibles y respetuosos con el medio ambiente. En resumen, el modelo de planificación de transporte desarrollado por los investigadores es un paso importante hacia la creación de sistemas de transporte más justos y eficientes, y puede tener un impacto significativo en la calidad de vida de las personas en todo el mundo.",
+    "category": "eess.SY",
+    "tags": [
+      "transporte",
+      "justicia social",
+      "eficiencia"
+    ],
+    "image_prompt": null,
+    "published_at": "2026-05-26T23:52:00.938563+00:00",
+    "status": "published",
+    "source_url": "https://arxiv.org/abs/2605.25617v1",
+    "image_query": "transporte sostenible urbano"
+  },
+  {
+    "id": "6832d1890894",
+    "paper_id": "arxiv_2605.25867v1",
+    "headline": "Nuevas políticas neuronales para controlar ecuaciones",
+    "summary": "Investigadores crean CINOC, una técnica para controlar ecuaciones diferenciales parciales de manera escalable y adaptable a diferentes configuraciones, lo que abre puertas a aplicaciones en múltiples campos, como la ingeniería y la física, con un enfoque innovador en el aprendizaje automático.",
+    "body": "El control de ecuaciones diferenciales parciales (PDE) es un desafío fundamental en muchos campos, desde la ingeniería hasta la física. Sin embargo, las políticas de aprendizaje basadas en redes neuronales han demostrado limitaciones importantes debido a la representación fija de dimensiones. Es decir, las políticas entrenadas para una configuración específica de sensores, actuadores o agentes suelen fallar cuando la configuración cambia. Este problema se agudiza en el control de PDE multiagente, donde las políticas no se escalan a diferentes tamaños de población sin necesidad de reentrenamiento. Para abordar este desafío, un equipo de investigadores ha desarrollado CINOC, una técnica que reformula el control de PDE como un problema de aprendizaje de operadores que mapea campos de estado a funciones de control continuas y las entrena de manera end-to-end a través de solvers de PDE diferenciables. Esto permite obtener políticas que se adaptan naturalmente a diferentes configuraciones de sensores y actuadores. Lo más destacado es que las políticas CINOC entrenadas pueden generalizar a diferentes escenarios sin necesidad de reentrenamiento, lo que abre puertas a aplicaciones en múltiples campos. La técnica CINOC tiene el potencial de revolucionar la forma en que se abordan los problemas de control de PDE, permitiendo una mayor flexibilidad y escalabilidad en la resolución de ecuaciones complejas. Aunque todavía existen limitaciones y desafíos por superar, el futuro de la investigación en este campo parece prometedor, con posibles aplicaciones en la optimización de procesos industriales, la simulación de fenómenos naturales y el diseño de sistemas complejos.",
+    "category": "eess.SY",
+    "tags": [
+      "inteligencia artificial",
+      "ecuaciones en derivadas parciales",
+      "control de sistemas"
+    ],
+    "image_prompt": null,
+    "published_at": "2026-05-26T23:51:57.259551+00:00",
+    "status": "published",
+    "source_url": "https://arxiv.org/abs/2605.25867v1",
+    "image_query": "ecuaciones diferenciales parciales"
+  },
+  {
+    "id": "fc3b93cc4634",
+    "paper_id": "arxiv_2605.25115v1",
+    "headline": "Modelo de Inteligencia Artificial 'Courant' Revoluciona Simulaciones",
+    "summary": "Investigadores desarrollan modelo de inteligencia artificial que simula fenómenos físicos con precisión y eficiencia, abriendo nuevas posibilidades en ciencia y tecnología. El modelo 'Courant' utiliza técnicas de aprendizaje automático para mejorar la precisión de las simulaciones.",
+    "body": "Un equipo de investigadores ha desarrollado un modelo de inteligencia artificial llamado 'Courant', que utiliza técnicas de aprendizaje automático para simular fenómenos físicos con mayor precisión y eficiencia. Este modelo se basa en la arquitectura de 'Perceiver', que combina un codificador, un procesador y un decodificador para analizar y procesar datos. La novedad de 'Courant' radica en su capacidad para adaptarse a diferentes situaciones y contextos, lo que le permite simular fenómenos físicos de manera más precisa y realista. El modelo utiliza una técnica llamada 'Fourier feature coordinate embedding' para representar los datos de manera más eficiente, y un decodificador ligero para generar los resultados finales. Los investigadores han entrenado a 'Courant' con datos de simulaciones estacionarias y transitorias, y han demostrado que puede alcanzar una precisión competitiva con otros modelos existentes. Una de las ventajas más importantes de 'Courant' es que sus resultados son interpretables, lo que significa que los investigadores pueden entender cómo el modelo llega a sus conclusiones. Esto es especialmente importante en campos como la física y la ingeniería, donde la precisión y la confiabilidad son fundamentales. El modelo 'Courant' tiene el potencial de revolucionar la forma en que se realizan las simulaciones en una variedad de campos, desde la física y la ingeniería hasta la medicina y la biología. Los investigadores esperan que su modelo pueda ser utilizado para mejorar la precisión y la eficiencia de las simulaciones, lo que podría llevar a avances significativos en nuestra comprensión del mundo natural. Sin embargo, también reconocen que el modelo tiene limitaciones y que es necesario seguir investigando para mejorar su precisión y robustez. En el futuro, es probable que veamos el desarrollo de modelos como 'Courant' que puedan ser utilizados en una variedad de aplicaciones, desde la simulación de fenómenos físicos hasta la predicción de resultados en campos como la medicina y la finanza.",
+    "category": "physics.app-ph",
+    "tags": [
+      "inteligencia artificial",
+      "simulaciones cientificas",
+      "aprendizaje automatico"
+    ],
+    "image_prompt": null,
+    "published_at": "2026-05-26T23:51:53.372167+00:00",
+    "status": "published",
+    "source_url": "https://arxiv.org/abs/2605.25115v1",
+    "image_query": "Simulación de fluidos dinámicos"
+  },
+  {
+    "id": "09bad0e2dd66",
+    "paper_id": "arxiv_2605.25471v1",
+    "headline": "Láseres más estables gracias a innovadora tecnología",
+    "summary": "Investigadores han desarrollado un sistema de estabilización de frecuencia láser con reducción de ruido de banda ancha, utilizando un observador de perturbaciones digital implementado en un FPGA, lo que mejora la precisión en aplicaciones científicas y tecnológicas.",
+    "body": "Un equipo de investigadores ha logrado un avance significativo en la estabilización de la frecuencia de los láseres, lo que es crucial en diversas aplicaciones científicas y tecnológicas. El sistema desarrollado combina un controlador convencional con un observador de perturbaciones digital implementado en un FPGA, lo que permite una reducción notable del ruido de banda ancha en la frecuencia del láser. Este logro se debe a la implementación de un filtro de media móvil exponencial de primer orden como Q-filter en el observador de perturbaciones. La medición del ruido de frecuencia y la desviación de Allan en la línea D2 del rubidio-87 a 780,24 nm mostró una disminución del ruido de frecuencia integrado por debajo de 40 kHz en 16,9 dB en comparación con el controlador PID solo. Esto se traduce en una mayor precisión y estabilidad en aplicaciones como la espectroscopía de modulación y la interferometría. La innovadora tecnología FPGA-based disturbance-observer servo puede tener un impacto significativo en la investigación científica y el desarrollo de tecnologías precisas. Sin embargo, es importante destacar que el sistema aún tiene limitaciones y requiere más investigación para optimizar su rendimiento y aplicabilidad en diferentes contextos. En el futuro, se espera que esta tecnología pueda ser adaptada y mejorada para satisfacer las necesidades de diversas aplicaciones, lo que podría conducir a avances significativos en campos como la física, la química y la ingeniería.",
+    "category": "physics.app-ph",
+    "tags": [
+      "física",
+      "laser",
+      "estabilización de frecuencia",
+      "FPGA",
+      "supresión de ruido"
+    ],
+    "image_prompt": null,
+    "published_at": "2026-05-26T23:51:49.276128+00:00",
+    "status": "published",
+    "source_url": "https://arxiv.org/abs/2605.25471v1",
+    "image_query": "Láseres y espectroscopía"
+  },
+  {
+    "id": "15643dde49db",
+    "paper_id": "arxiv_2605.25718v1",
+    "headline": "Nuevos materiales para conversion de frecuencia optica",
+    "summary": "Investigadores descubren propiedades unicas en perovskitas de plomo-halogeno, permitiendo conversion de frecuencia optica sin necesidad de alineacion precisa, abriendo nuevas posibilidades para tecnologias de comunicacion y sensores.",
+    "body": "Un equipo de investigadores ha descubierto que las perovskitas de plomo-halogeno poseen propiedades opticas no lineales excepcionales, lo que las convierte en materiales ideales para la conversion de frecuencia optica. La conversion de frecuencia es un proceso fundamental en la tecnologia de comunicacion y sensores, ya que permite la transmision de informacion a traves de diferentes longitudes de onda. Sin embargo, los metodos tradicionales de conversion de frecuencia requieren una alineacion precisa y un control estricto de la dispersion, lo que limita su eficiencia y flexibilidad. Las perovskitas de plomo-halogeno, por otro lado, pueden realizar la conversion de frecuencia de manera ultra-amplia y sin necesidad de alineacion precisa, lo que las hace ideales para aplicaciones en tecnologias de comunicacion y sensores. Los investigadores lograron demostrar la capacidad de estas perovskitas para realizar la conversion de frecuencia en un rango continuo de longitudes de onda, sin necesidad de ingenieria de fase o optimizacion de dispersion. Los resultados de los experimentos mostraron que la emision se origina cerca de la superficie del cristal, donde las restricciones de fase se relajan, lo que permite una conversion de frecuencia eficiente y direccional. La respuesta intrinseca $χ^{(3)}$ de las perovskitas de plomo-halogeno es excepcionalmente grande, lo que preserva la eficiencia y la direccionalidad de la conversion de frecuencia a pesar de la interaccion localizada. Estos hallazgos abren nuevas posibilidades para el desarrollo de tecnologias de comunicacion y sensores mas avanzadas y eficientes. Sin embargo, es importante destacar que la investigacion todavia se encuentra en una etapa temprana y que se necesitan mas estudios para explorar completamente el potencial de las perovskitas de plomo-halogeno. En el futuro, es posible que veamos el desarrollo de dispositivos de conversion de frecuencia mas avanzados y eficientes, lo que podría tener un impacto significativo en la tecnologia de comunicacion y sensores.",
+    "category": "physics.app-ph",
+    "tags": [
+      "física",
+      "óptica",
+      "perovskitas",
+      "fotónica no lineal"
+    ],
+    "image_prompt": null,
+    "published_at": "2026-05-26T23:51:45.321891+00:00",
+    "status": "published",
+    "source_url": "https://arxiv.org/abs/2605.25718v1",
+    "image_query": "perovskitas cristales"
+  },
+  {
+    "id": "0a71d5bd4968",
+    "paper_id": "arxiv_2605.25875v1",
+    "headline": "Comportamiento social influye en propagación de epidemias",
+    "summary": "Investigadores descubren que la homofilia conductual y la conformidad influencian la propagación de epidemias en redes sociales. Esto puede ayudar a entender mejor cómo se propagan las enfermedades y cómo prevenirlas. El estudio se centró en redes con grupos grandes y densamente conectados.",
+    "body": "La propagación de epidemias es un tema de gran interés en la epidemiología matemática. La forma en que el comportamiento social influye en la dinámica de las epidemias es un área de investigación en constante crecimiento. En particular, la homofilia conductual, que se refiere a la tendencia de las personas a asociarse con individuos similares, y la conformidad, que implica la adaptación del comportamiento individual a las normas del grupo, son mecanismos clave que pueden influir en la propagación de enfermedades. Un equipo de investigadores ha estudiado el impacto combinado de estos procesos conductuales en la dinámica de epidemias en redes sociales con grupos grandes y densamente conectados. Los resultados del estudio sugieren que la homofilia conductual y la conformidad pueden influir significativamente en la propagación de epidemias, y que la comprensión de estos mecanismos puede ser fundamental para el desarrollo de estrategias efectivas de prevención y control de enfermedades. El estudio utiliza un marco teórico llamado ecuaciones maestras aproximadas (AME) para caracterizar la dinámica de las epidemias en estas redes. Los investigadores encontraron que la homofilia conductual y la conformidad pueden influir en la velocidad y la eficacia de la propagación de las epidemias, y que la comprensión de estos mecanismos puede ser crucial para el desarrollo de políticas públicas efectivas de salud. Sin embargo, el estudio también destaca las limitaciones actuales de la investigación, como la falta de datos empíricos y la necesidad de más estudios para validar los resultados. En el futuro, es probable que la investigación en este área se centre en la recopilación de datos y la validación de los modelos teóricos, con el objetivo de desarrollar estrategias más efectivas para prevenir y controlar la propagación de epidemias.",
+    "category": "physics.app-ph",
+    "tags": [
+      "epidemiologia",
+      "redes sociales",
+      "comportamiento humano"
+    ],
+    "image_prompt": null,
+    "published_at": "2026-05-26T23:51:41.085632+00:00",
+    "status": "published",
+    "source_url": "https://arxiv.org/abs/2605.25875v1",
+    "image_query": "redes sociales y epidemias"
+  },
+  {
+    "id": "3a9b5173c9ee",
+    "paper_id": "arxiv_2605.26113v1",
+    "headline": "Nuevas escenas de conducción sintéticas",
+    "summary": "Investigadores crean un marco para generar escenas de conducción sintéticas con alta fidelidad y control, lo que puede mejorar la seguridad en la conducción autónoma. El sistema AnyScene permite generar secuencias de ocupación semántica a partir de layouts de vista aérea.",
+    "body": "La generación de datos sintéticos de alta calidad es fundamental para avanzar en la conducción autónoma, especialmente para abordar escenarios de seguridad críticos raros. Los métodos existentes suelen basarse en mecanismos de acondicionamiento superficiales y síntesis de video dependientes del marco de referencia, lo que limita el control fino desde layouts de vista aérea arbitrarios y restringe su aplicabilidad para simulaciones escalables. En este trabajo, se propone AnyScene, un marco unificado centrado en la ocupación para la generación de escenas de conducción. AnyScene genera secuencias de ocupación semántica a partir de layouts de vista aérea mediante un transformador de difusión de ocupación espaciotemporal que tokeniza conjuntamente características de vista aérea y ocupación de manera autoregresiva. Este diseño permite un control preciso sobre la generación de escenas, lo que puede ser útil para mejorar la seguridad en la conducción autónoma. Los investigadores han logrado generar escenas de conducción sintéticas con alta fidelidad y control, lo que puede ser beneficioso para la industria del transporte. Sin embargo, aún existen limitaciones en la generación de escenas complejas y la integración con sistemas de conducción autónoma reales. En el futuro, se espera que esta tecnología pueda ser utilizada para mejorar la seguridad en la conducción autónoma y reducir el número de accidentes de tráfico.",
+    "category": "cs.RO",
+    "tags": [
+      "inteligencia artificial",
+      "conducción autónoma",
+      "generación de escenas"
+    ],
+    "image_prompt": null,
+    "published_at": "2026-05-26T23:51:37.085605+00:00",
+    "status": "published",
+    "source_url": "https://arxiv.org/abs/2605.26113v1",
+    "image_query": "carreteras sintéticas generadas"
+  },
+  {
+    "id": "28f5283fd31c",
+    "paper_id": "arxiv_2605.25847v1",
+    "headline": "Vehiculos electricos autonomos mejoran flexibilidad energetica",
+    "summary": "Investigadores proponen un sistema de despacho de vehiculos electricos autonomos para apoyar la red energetica en ciudades inteligentes, mejorando la flexibilidad energetica a corto plazo y reduciendo la congestión",
+    "body": "En un esfuerzo por mejorar la eficiencia y la sostenibilidad de la red energetica en ciudades inteligentes, un equipo de investigadores ha desarrollado un marco de despacho de energía y movilidad coordinado. Este sistema permite a los vehiculos electricos autonomos conectados proporcionar apoyo a la red energetica en momentos de alta demanda, reduciendo la congestión y mejorando la flexibilidad energetica a corto plazo. El sistema utiliza una tecnología de particionamiento de baterías virtuales, que permite a los vehiculos electricos autonomos liberar energía a la red cuando no estén en uso. Los vehiculos son despachados dinámicamente hacia estaciones de carga y descarga, donde pueden liberar o absorber energía según sea necesario. El sistema también utiliza un modelo predictivo de control para regular la velocidad de los vehiculos y asegurarse de que lleguen a su destino dentro del plazo establecido. Esta tecnología tiene el potencial de revolucionar la forma en que se gestionan las redes energeticas en ciudades inteligentes, reduciendo la dependencia de fuentes de energía no renovables y mejorando la calidad del aire. Sin embargo, todavía existen desafíos técnicos y regulatorios que deben ser abordados antes de que esta tecnología pueda ser implementada a gran escala. En el futuro, es probable que veamos una mayor adopción de esta tecnología, lo que podría llevar a una reducción significativa de las emisiones de gases de efecto invernadero y una mejora de la calidad de vida en las ciudades.",
+    "category": "eess.SY",
+    "tags": [
+      "vehículos eléctricos",
+      "ciudades inteligentes",
+      "flexibilidad de la red"
+    ],
+    "image_prompt": null,
+    "published_at": "2026-05-26T23:51:33.412134+00:00",
+    "status": "published",
+    "source_url": "https://arxiv.org/abs/2605.25847v1",
+    "image_query": "vehiculos electricos autonomos en ciudad"
+  },
+  {
+    "id": "f9f11a78f374",
+    "paper_id": "arxiv_2605.25607v1",
+    "headline": "Redes neuronales óptimas gracias a la entropía máxima",
+    "summary": "Investigadores proponen un nuevo enfoque para entender la conectividad neuronal basado en el principio de entropía máxima, lo que permite describir la estructura óptima de redes neuronales para tareas cognitivas específicas sin depender de algoritmos de aprendizaje específicos.",
+    "body": "La comprensión de cómo la función de las redes neuronales restringe la conectividad neuronal es un desafío fundamental en neurociencia. Un enfoque influyente ha sido entrenar redes neuronales con gradientes descendentes en tareas cognitivas y caracterizar la conectividad resultante. Sin embargo, una limitación clave es que la estructura resultante depende de los detalles del procedimiento de entrenamiento. En este sentido, los investigadores han propuesto un enfoque normativo complementario basado en el principio de entropía máxima para la conectividad de las redes neuronales, independiente de cualquier algoritmo de aprendizaje en particular. Este enfoque describe la conectividad como una distribución de probabilidad sobre los pesos de las neuronas individuales, expresa los requisitos de la tarea como restricciones sobre esta distribución y determina la distribución única que maximiza la entropía de Shannon sujetándose a estas restricciones. Un parámetro de escala de peso controla el equilibrio entre la estructura y la aleatoriedad en la conectividad neuronal. Este enfoque ofrece una perspectiva novedosa para entender cómo las redes neuronales procesan la información y toman decisiones. Además, puede tener implicaciones importantes para el desarrollo de modelos de redes neuronales más realistas y eficientes, lo que podría mejorar nuestra comprensión de la cognición y el comportamiento humano. Sin embargo, es importante destacar que este enfoque todavía se encuentra en sus primeras etapas y requiere más investigación para explorar sus posibles aplicaciones y limitaciones. En el futuro, se espera que este enfoque pueda contribuir significativamente a la comprensión de la compleja relación entre la estructura y la función en las redes neuronales.",
+    "category": "q-bio.NC",
+    "tags": [
+      "neurociencia",
+      "maxima entropia",
+      "redes neuronales"
+    ],
+    "image_prompt": null,
+    "published_at": "2026-05-26T23:51:29.403976+00:00",
+    "status": "published",
+    "source_url": "https://arxiv.org/abs/2605.25607v1",
+    "image_query": "redes neuronales cerebro"
+  },
+  {
+    "id": "f1e1b460e896",
+    "paper_id": "pubmed_42189437",
+    "headline": "Puntuaciones de riesgo genético",
+    "summary": "Un estudio en Europa analiza las implicaciones sociales y culturales de las puntuaciones de riesgo genético en la salud pública, destacando la equidad y la responsabilidad institucional en la prevención de enfermedades.",
+    "body": "En la era de la medicina personalizada, las puntuaciones de riesgo genético (PRS) están cada vez más presentes en la salud pública. Sin embargo, su impacto en la sociedad va más allá de su utilidad clínica. Un estudio reciente ha explorado cómo los profesionales de la salud y los investigadores en Europa perciben las dimensiones sociales, culturales y de salud pública de las PRS. A través de 26 entrevistas semi-estructuradas con expertos en diversos campos médicos y de investigación, los investigadores identificaron seis temas clave que reflejan las preocupaciones y perspectivas de los participantes. Entre ellos, se encuentran las implicaciones sociales de utilizar las PRS para informar programas de prevención de salud pública, la equidad en la aplicación de estas herramientas y la responsabilidad institucional en relación con los determinantes sociales de las enfermedades. Los resultados sugieren que, aunque las PRS tienen el potencial de mejorar la salud pública, su implementación debe considerar cuidadosamente las desigualdades y las diferencias culturales entre las poblaciones. Además, se destaca la necesidad de una mayor conciencia y regulación en el uso de las PRS para evitar la estigmatización y la discriminación de ciertos grupos. En el futuro, será fundamental abordar estas cuestiones para garantizar que las PRS se utilicen de manera justa y beneficien a toda la sociedad. Con la continua evolución de la tecnología genética, es esencial que los profesionales de la salud, los investigadores y los responsables de las políticas de salud pública trabajen juntos para desarrollar directrices claras y éticas para el uso de las PRS en la práctica clínica y la investigación.",
+    "category": "health",
+    "tags": [
+      "genomica",
+      "salud publica",
+      "etica"
+    ],
+    "image_prompt": null,
+    "published_at": "2026-05-26T23:51:25.522200+00:00",
+    "status": "published",
+    "source_url": "https://doi.org/10.1007/s12687-026-00900-z",
+    "image_query": "genética molecular"
+  },
+  {
+    "id": "6ab8cb9008dd",
+    "paper_id": "arxiv_2605.25278v1",
+    "headline": "Nuevas fórmulas para entender procesos aleatorios",
+    "summary": "Investigadores derivan fórmulas para calcular la varianza y el factor de Fano en procesos gaussianos estacionarios, permitiendo entender mejor la organización temporal de eventos aleatorios como los disparos neuronales.",
+    "body": "La comprensión de los procesos aleatorios es fundamental en diversas disciplinas científicas. La fórmula de Kac-Rice tradicional proporciona la tasa media de cruces de nivel, pero solo ofrece una visión general de la proceso de cruce. Para entender si los eventos de cruce, como los disparos neuronales, tienden a agruparse en el tiempo, dispersarse o exhibir una organización temporal más compleja, es necesario ir más allá de la tasa media y estudiar las estadísticas de orden superior. En este sentido, un equipo de investigadores ha derivado fórmulas analíticas exactas para la varianza y el factor de Fano de cruces de nivel arbitrarios en procesos gaussianos estacionarios. Estas fórmulas permiten analizar la estructura de correlación del proceso en el tiempo, lo que es crucial para entender la organización temporal de los eventos aleatorios. La varianza y el factor de Fano son medidas que describen la dispersión y la regularidad de los eventos de cruce, respectivamente. La derivación de estas fórmulas es un avance significativo en la comprensión de los procesos aleatorios y tiene implicaciones en diversas áreas, como la neurociencia y la física. Los investigadores esperan que estas fórmulas sean útiles para analizar y entender mejor la complejidad de los procesos aleatorios en diferentes campos. Sin embargo, también reconocen que estas fórmulas tienen limitaciones y que es necesario seguir investigando para mejorar nuestra comprensión de los procesos aleatorios. En el futuro, es probable que se desarrollen nuevas aplicaciones y extensiones de estas fórmulas, lo que permitirá una mayor comprensión de la complejidad de los procesos aleatorios y su papel en la naturaleza.",
+    "category": "q-bio.NC",
+    "tags": [
+      "procesos estocasticos",
+      "gaussianos",
+      "estadistica"
+    ],
+    "image_prompt": null,
+    "published_at": "2026-05-26T23:51:21.731741+00:00",
+    "status": "published",
+    "source_url": "https://arxiv.org/abs/2605.25278v1",
+    "image_query": "procesos gaussianos estacionarios"
+  },
+  {
+    "id": "b5efc1a1b020",
+    "paper_id": "pubmed_42189506",
+    "headline": "Cáncer de colon: tratamiento innovador logra respuesta completa",
+    "summary": "Un nuevo estudio muestra que la terapia inmunológica neoadyuvante puede lograr una respuesta patológica completa en pacientes con cáncer de colon con reparo deficiente de emparejamiento de bases. Un caso de una mujer de 80 años con cáncer de colon avanzado muestra resultados prometedores.",
+    "body": "El cáncer de colon es una de las enfermedades más comunes y letales en el mundo. Sin embargo, los tratamientos tradicionales a menudo no son efectivos en ciertos tipos de cáncer, como el cáncer de colon con reparo deficiente de emparejamiento de bases (dMMR). Este tipo de cáncer se caracteriza por una mutación en los genes que reparan los errores en el ADN, lo que hace que el cáncer sea más resistente a los tratamientos convencionales. Sin embargo, un nuevo estudio ha mostrado que la terapia inmunológica neoadyuvante puede lograr una respuesta patológica completa en pacientes con este tipo de cáncer. La terapia inmunológica neoadyuvante se refiere al tratamiento con medicamentos que estimulan el sistema inmunológico para atacar al cáncer antes de la cirugía. En este caso, se utilizó una combinación de dos medicamentos, nivolumab y ipilimumab, que se han mostrado efectivos en el tratamiento de otros tipos de cáncer. El estudio describe el caso de una mujer de 80 años con cáncer de colon avanzado que se extendía a los órganos adyacentes. Después de someterse a una cirugía para crear un estoma, la paciente recibió la terapia inmunológica neoadyuvante con nivolumab y ipilimumab. Los resultados fueron sorprendentes: el tumor se redujo rápidamente y la paciente logró una respuesta patológica completa. Sin embargo, la rápida regresión del tumor también causó la formación de una fístula transitoria entre el colon ascendente y el colon transverso. Afortunadamente, la fístula se cerró después de la cirugía y la paciente se recuperó completamente. Este caso muestra que la terapia inmunológica neoadyuvante puede ser una opción efectiva para pacientes con cáncer de colon con reparo deficiente de emparejamiento de bases. Sin embargo, es importante destacar que este tratamiento también puede tener efectos secundarios, como la formación de fístulas. Por lo tanto, es fundamental que los pacientes sean cuidadosamente seleccionados y monitoreados durante el tratamiento. En resumen, este estudio ofrece nuevos horizontes para el tratamiento del cáncer de colon y destaca la importancia de la terapia inmunológica neoadyuvante en la lucha contra esta enfermedad. Los resultados de este estudio pueden tener un impacto significativo en la forma en que se trata el cáncer de colon en el futuro y pueden ofrecer nuevas opciones de tratamiento para pacientes con este tipo de cáncer.",
+    "category": "health",
+    "tags": [
+      "cáncer de colon",
+      "inmunoterapia",
+      "terapia neoadyuvante"
+    ],
+    "image_prompt": null,
+    "published_at": "2026-05-26T23:51:17.942334+00:00",
+    "status": "published",
+    "source_url": "https://doi.org/10.1080/1750743X.2026.2678750",
+    "image_query": "células cancerígenas colon"
+  },
+  {
     "id": "c1d7e6a2d430",
     "paper_id": "pubmed_42177638",
     "headline": "Perros con hiper cortisolismo resistente al tratamiento",
