@@ -762,7 +762,7 @@ async function load(){{
     <div class="art-body">${{bodyHtml(a.body)}}</div>
     ${{srcUrl?`
     <div class="art-source">
-      <div class="art-source-label">Fuente cient&iacute;fica</div>
+      <div class="art-source-label">Referencia:</div>
       <a href="${{esc(srcUrl)}}" target="_blank" rel="noopener">
         Consulta el paper completo &nearr;
       </a>
